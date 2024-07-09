@@ -6,17 +6,6 @@ $curso = new Curso_Clase();
 $metodo = $_SERVER['REQUEST_METHOD'];
 
 switch($_GET["op"]){
-    
-    /* Procedimiento para listar todos los registros */
-    case 'todos':
-        $datos = array();
-        $datos = $curso->todos();
-        $todos = array();
-        foreach ($datos as $row) {
-            $todos[] = $row;
-        }
-        echo json_encode($todos);
-        break;
         
     /* Procedimiento para sacar un registro */
     case 'uno':
@@ -44,9 +33,11 @@ switch($_GET["op"]){
     break;
     
     case "insertar":
-        $datos = json_decode(file_get_contents("php://input"));
-        if (!empty($datos->nombre_curso) && !empty($datos->creditos)) {
-            $registro = $curso->registrarCurso($datos->nombre_curso, $datos->creditos);
+        $nombre = $_POST["nombre"] ?? null;
+        $creditos = $_POST["creditos"] ?? null;
+
+        if (!empty($nombre) && !empty($creditos)) {
+            $registro = $curso->registrarCurso($nombre, $creditos);
             echo json_encode($registro);
         } else {
             echo json_encode("Faltan Datos");

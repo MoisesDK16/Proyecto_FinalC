@@ -3,24 +3,6 @@ require_once("../config/conexion.php");
 
 class Curso_Clase {
 
-    public function todos() {
-        $conexion = new Clase_Conectar();
-        $con = $conexion->conectar();
-
-        $sql = "SELECT id_curso, nombre_curso, creditos FROM cursos";
-        $datos = mysqli_query($con, $sql);
-
-        $resultado = [];
-        if ($datos) {
-            while ($row = mysqli_fetch_assoc($datos)) {
-                $resultado[] = $row;
-            }
-        }
-        
-        $con->close(); 
-        return $resultado;
-    }
-
     public function uno($idCurso) {
         $conexion = new Clase_Conectar();
         $con = $conexion->conectar();

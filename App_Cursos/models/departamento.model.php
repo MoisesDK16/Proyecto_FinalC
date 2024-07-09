@@ -17,6 +17,20 @@ class Departamento_Clase {
         return $datos;
     }
     
+    public function uno($idDepartamento)
+    {
+        $con = new Clase_Conectar();
+        $con = $con->Procedimiento_Conectar();
+
+        $cadena = "SELECT id_departamento, nombre_departamento FROM departamentos WHERE id_departamento  = ?";
+        $stmt = $con->prepare($cadena);
+        $stmt->bind_param('i', $idDepartamento);
+        $stmt->execute();
+        $datos = $stmt->get_result()->fetch_assoc(); 
+        return $datos;
+        $con->close(); 
+    }
+
     public function registrarDepartamento($nombre_departamento){
         $conexion = new Clase_Conectar();
         $con = $conexion->conectar();

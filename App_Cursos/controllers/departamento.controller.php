@@ -3,9 +3,20 @@
 require_once("../models/departamento.model.php");
 
 $departamento = new Departamento_Clase();
+$metodo = $_SERVER['REQUEST_METHOD'];
 
 switch($_GET["op"]){
     
+    case 'uno':
+        if (isset($_GET["id_departamento"])) {
+            $idDepartamento = intval($_GET["id_departamento"]);
+            $datos = $departamento->uno($idDepartamento);
+            echo json_encode($datos); // Devuelve los datos del usuario en formato JSON
+        } else {
+            echo json_encode(array("message" => "ID no proporcionado"));
+        }
+        break;
+
     case "listar":
         $departamentos = array();
         $datos = $departamento->listarDepartamento();
@@ -21,9 +32,9 @@ switch($_GET["op"]){
     break;
     
     case "insertar":
-        $datos = json_decode(file_get_contents("php://input"));
-        if (!empty($datos->nombre_departamento)) {
-            $registro = $departamento->registrarDepartamento($datos->nombre_departamento);
+        $Nombre = $_POST["Nombre"] ?? null;
+        if (!empty($Nombre)) {
+            $registro = $departamento->registrarDepartamento($Nombre);
             echo json_encode($registro);
         } else {
             echo json_encode("Faltan Datos");
@@ -31,9 +42,11 @@ switch($_GET["op"]){
     break;
 
     case "actualizar":
-        $datos = json_decode(file_get_contents("php://input"));
-        if (!empty($datos->id_departamento) && !empty($datos->nombre_departamento)) {
-            $actualizado = $departamento->actualizarDepartamento($datos->id_departamento, $datos->nombre_departamento);
+        $DepartamentoId = $_POST["DepartamentoId"] ?? null;
+        $Nombre = $_POST["Nombre"] ?? null;
+
+        if (!empty($DepartamentoId) && !empty($Nombre)) {
+            $actualizado = $departamento->actualizarDepartamento($DepartamentoId, $Nombre);
             if ($actualizado) {
                 echo json_encode("Actualizado");
             } else {
@@ -45,14 +58,15 @@ switch($_GET["op"]){
     break;
 
     case "eliminar":
-        if (isset($_GET["id"])) {
-            $id_departamento = $_GET["id"];
+        if (isset($_POST["id_departamento"])) {
+            $id_departamento = $_POST["id_departamento"];
             $eliminado = $departamento->eliminarDepartamento($id_departamento);
             echo json_encode($eliminado);
         } else {
             echo json_encode("Error al eliminar");
         }
     break;
+
 }
 
 ?>

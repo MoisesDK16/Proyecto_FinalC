@@ -12,7 +12,7 @@ $(document).ready(() => {
 var cargaTabla = () => {
     var html = "";
 
-    $.get("../controllers/curso.controler.php?op=todos", (response) => {
+    $.get("../controllers/curso.controller.php?op=listar", (response) => {
         let listaCursos;
         try {
             listaCursos = JSON.parse(response);
@@ -52,10 +52,10 @@ var guardaryeditar = (e) => {
     var ruta = "";
     if (CursoIdEdit != "") {
         // Actualizar
-        ruta = "../controllers/curso.controler.php?op=actualizar";
+        ruta = "../controllers/curso.controller.php?op=actualizar";
     } else {
         // Insertar
-        ruta = "../controllers/curso.controler.php?op=insertar";
+        ruta = "../controllers/curso.controller.php?op=insertar";
     }
 
     $.ajax({
@@ -89,7 +89,7 @@ var eliminar = (CursoId) => {
     }).then((result) => {
         if (result.isConfirmed) {
             $.ajax({
-                url: "../controllers/curso.controler.php?op=eliminar",
+                url: "../controllers/curso.controller.php?op=eliminar",
                 type: "POST",
                 data: { id_curso: CursoId },
                 success: (resultado) => {
@@ -124,7 +124,7 @@ var eliminar = (CursoId) => {
 // Editar curso
 var editar = (CursoId) => { 
     $.ajax({
-        url: `../controllers/curso.controler.php?op=uno&id=${CursoId}`,
+        url: `../controllers/curso.controller.php?op=uno&id=${CursoId}`,
         type: "GET",
         success: function (data) {
             $("#CursoId").val(data.id_curso); 
