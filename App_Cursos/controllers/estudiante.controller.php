@@ -7,16 +7,19 @@ switch($_GET["op"]){
 
     case "listar":
         $estudiantes = array();
-        $estudiante = $estudiante->listar_estudiantes();
-        if($row = mysqli_fetch_assoc($estudiante)){
+        $dato = $estudiante->listar_estudiantes();
+        while ($row = mysqli_fetch_assoc($dato)) {
             $estudiantes[] = $row;
-            echo json_encode($estudiantes);
-        }else{
-            $estudiantes[] = array();
-            echo json_encode("No hay estudiantes");
         }
-
-    break;
+        
+        if (!empty($estudiantes)) {
+            echo json_encode($estudiantes);
+        } else {
+            echo json_encode(array("message" => "No hay estudiantes"));
+        }
+    
+        break;
+    
 
     case "insertar":
 
