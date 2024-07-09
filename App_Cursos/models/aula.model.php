@@ -1,1 +1,3 @@
-//jajajja xd
+<?php
+
+require_once("");

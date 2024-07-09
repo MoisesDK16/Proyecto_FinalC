@@ -1,3 +1,0 @@
-//oaakaam
-//oaakaam
-//hola jejeje
