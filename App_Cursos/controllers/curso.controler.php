@@ -3,9 +3,32 @@
 require_once("../models/curso.model.php");
 
 $curso = new Curso_Clase();
+$metodo = $_SERVER['REQUEST_METHOD'];
 
 switch($_GET["op"]){
     
+    /* Procedimiento para listar todos los registros */
+    case 'todos':
+        $datos = array();
+        $datos = $curso->todos();
+        $todos = array();
+        foreach ($datos as $row) {
+            $todos[] = $row;
+        }
+        echo json_encode($todos);
+        break;
+        
+    /* Procedimiento para sacar un registro */
+    case 'uno':
+        if (isset($_GET["id"])) {
+            $idCurso = intval($_GET["id"]);
+            $datos = $curso->uno($idCurso);
+            echo json_encode($datos); // Devuelve los datos del curso en formato JSON
+        } else {
+            echo json_encode(array("message" => "ID no proporcionado"));
+        }
+        break;
+
     case "listar":
         $cursos = array();
         $datos = $curso->listarCurso();
