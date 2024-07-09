@@ -18,16 +18,20 @@ switch($_GET["op"]){
     break;
 
     case "listar": 
-        $aulas= array();
+        $aulas = array();
         $dato = $aula->listarAulas();
-        if ($fila = mysqli_fetch_assoc($dato)) {
+        while ($fila = mysqli_fetch_assoc($dato)) {
             $aulas[] = $fila;
+        }
+    
+        if (!empty($aulas)) {
             echo json_encode($aulas);
         } else {
-            $aulas[] = [];
+            echo json_encode(array("message" => "No hay aulas disponibles"));
         }
-
-    break;
+    
+        break;
+    
 
     case "actualizar":
         $datos = json_decode(file_get_contents("php://input"));
