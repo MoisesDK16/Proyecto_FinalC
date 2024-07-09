@@ -29,4 +29,25 @@ switch($_GET["op"]){
 
     break;
 
+    case "actualizar":
+        $datos = json_decode(file_get_contents("php://input"));
+        $aula->actualizarAula($datos->numero_aula, $datos->capacidad, $datos->id_aula);
+
+        if($aula){
+            echo "Aula actualizada";
+        }else{
+            echo "Error al actualizar aula";
+        }
+    break;
+
+    case "eliminar":
+        $datos = json_decode(file_get_contents("php://input"));
+        $aula->eliminarAula($datos->numero_aula);
+        if($aula){
+            echo "Aula eliminada";
+        }else{
+            echo "Error al eliminar aula";
+        }
+
+    break;
 }

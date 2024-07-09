@@ -35,8 +35,18 @@ class Clase_Aula{
         $sql = "UPDATE aulas SET numero_aula = ?, capacidad = ? WHERE id_aula = ?";
         $stmt = $con->prepare($sql);
         $stmt->bind_param("sii", $numero_aula, $capacidad, $id_aula);
+        $stmt->execute();
     }
 
+    public function eliminarAula($id_aula){
+        $conexion = new Clase_Conectar();
+        $con = $conexion->conectar();
+        $sql = "DELETE FROM aulas WHERE numero_aula = ?";
+        $stmt = $con->prepare($sql);
+        $stmt->bind_param("i", $id_aula);
+        $stmt->execute();
+        $con->close();
+    }   
 }
 
 
