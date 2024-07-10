@@ -44,29 +44,25 @@
             <!-- Navbar End -->
 
 
-            <!-- Nuevo Estudiante Modal -->
-            <div class="modal fade" id="modalEstudiante" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <!-- Nuevo Aula Modal -->
+            <div class="modal fade" id="modalAula" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                 <div class="modal-dialog">
                     <div class="modal-content">
                         <div class="modal-header">
-                            <h5 class="modal-title" id="exampleModalLabel">Nuevo Estudiante</h5>
+                            <h5 class="modal-title" id="exampleModalLabel">Nuevo Aula</h5>
                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
-                        <form id="frm_estudiantes">
+                        <form id="frm_aulas">
                             <div class="modal-body">
-                                <input type="hidden" name="EstudiantesId" id="EstudiantesId">
+                                <input type="hidden" name="AulasId" id="AulasId">
 
                                 <div class="form-group">
-                                    <label for="Nombre">Nombre</label>
-                                    <input type="text" name="Nombre" id="Nombre" placeholder="Ingrese el nombre del estudiante" class="form-control" required>
+                                    <label for="NumAula">Numero Aula</label>
+                                    <input type="text" name="NumAula" id="NumAula" placeholder="Ingrese el numero de aula" class="form-control" required>
                                 </div>
                                 <div class="form-group">
-                                    <label for="Apellido">Apellido</label>
-                                    <input type="text" name="Apellido" id="Apellido" placeholder="Ingrese el apellido del estudiante" class="form-control" required>
-                                </div>
-                                <div class="form-group">
-                                    <label for="FechaNacimiento">Fecha Nacimiento</label>
-                                    <input type="text" name="FechaNacimiento" id="FechaNacimiento" placeholder="Ingrese la fecha de nacimiento del estudiante" class="form-control" required>
+                                    <label for="Capacidad">Capacidad</label>
+                                    <input type="text" name="Capacidad" id="Capacidad" placeholder="Ingrese la capacidad del aula" class="form-control" required>
                                 </div>
                             </div>
                             <div class="modal-footer">
@@ -77,31 +73,27 @@
                     </div>
                 </div>
             </div>
-            <!-- Fin Nuevo Estudiante Modal -->
+            <!-- Fin Nuevo Aula Modal -->
 
-            <!-- Editar Estudiante Modal -->
-            <div class="modal fade" id="modalEditarEstudiante" tabindex="-1" aria-labelledby="editarEstudianteLabel" aria-hidden="true">
+            <!-- Editar Aula Modal -->
+            <div class="modal fade" id="modalEditarAula" tabindex="-1" aria-labelledby="editarAulaLabel" aria-hidden="true">
                 <div class="modal-dialog">
                     <div class="modal-content">
                         <div class="modal-header">
-                            <h5 class="modal-title" id="editarEstudianteLabel">Editar Estudiante</h5>
+                            <h5 class="modal-title" id="editarAulaLabel">Editar Aula</h5>
                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
-                        <form id="frm_editar_estudiantes">
+                        <form id="frm_editar_aula">
                             <div class="modal-body">
-                                <input type="hidden" name="EditarEstudianteId" id="EditarEstudianteId">
+                                <input type="hidden" name="EditarAulaId" id="EditarAulaId">
 
                                 <div class="form-group">
-                                    <label for="Nombre">Nombre</label>
-                                    <input type="text" name="Nombre" id="Nombre" placeholder="Ingrese el nombre del estudiante" class="form-control" required>
+                                    <label for="NumAula">Numero Aula</label>
+                                    <input type="text" name="NumAula" id="NumAula" placeholder="Ingrese el numero de aula" class="form-control" required>
                                 </div>
                                 <div class="form-group">
-                                    <label for="Apellido">Apellido</label>
-                                    <input type="text" name="Apellido" id="Apellido" placeholder="Ingrese el apellido del estudiante" class="form-control" required>
-                                </div>
-                                <div class="form-group">
-                                    <label for="FechaNacimiento">Fecha Nacimiento</label>
-                                    <input type="text" name="FechaNacimiento" id="FechaNacimiento" placeholder="Ingrese la fecha de nacimiento del estudiante" class="form-control" required>
+                                    <label for="Capacidad">Capacidad</label>
+                                    <input type="text" name="Capacidad" id="Capacidad" placeholder="Ingrese la capacidad del aula" class="form-control" required>
                                 </div>
                             </div>
                             <div class="modal-footer">
@@ -112,31 +104,30 @@
                     </div>
                 </div>
             </div>
-            <!-- Fin Editar Estudiante Modal -->
+            <!-- Fin Editar Aula Modal -->
 
-            <!-- Lista de Productos -->
+            <!-- Lista de Aula -->
             <div class='container-fluid pt-4 px-4'>
-                <button type="button" class="btn btn-primary " data-bs-toggle="modal" data-bs-target="#modalEstudiante">
-                    Nuevo Estudiante
+                <button type="button" class="btn btn-primary " data-bs-toggle="modal" data-bs-target="#modalEditarAula">
+                    Nueva Aula
                 </button>
                 <div class='d-flex align-items-center justify-content-between mb-4'>
-                    <h6 class='mb-0'> Lista de Estudiantes</h6>
+                    <h6 class='mb-0'> Lista de Aulas</h6>
                     <table class="table table-bordered table-striped table-hover table-responsive">
                         <thead class="table-light">
                             <tr>
                                 <th>#</th>
-                                <th>Nombre</th>
-                                <th>Apellido</th>
-                                <th>Fecha Nacimiento</th>
+                                <th>Numero de Aula</th>
+                                <th>Capacidad</th>
                             </tr>
                         </thead>
-                        <tbody id="cuerpoestudiantes">
+                        <tbody id="cuerpoaulas">
                             <!-- Aquí van los datos de los productos -->
                         </tbody>
                     </table>
                 </div>
             </div>
-            <!-- Fin Lista de Productos -->
+            <!-- Fin Lista de Aula -->
 
 
             <!-- Widgets Start -->
@@ -158,7 +149,7 @@
 
     <!-- JavaScript Libraries -->
     <?php require_once('./html/scripts.php') ?>
-    <script src="estudiante.js"></script>
+    <script src="aula.js"></script>
 
 </body>
 

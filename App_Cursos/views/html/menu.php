@@ -18,6 +18,10 @@
 
             <a href='departamento.php' class='nav-item nav-link'><i class='fa fa-th me-2'></i>Departamentos</a>
             <a href='estudiante.php' class='nav-item nav-link'><i class='fa fa-th me-2'></i>Estudiante</a>
+            <a href='aula.php' class='nav-item nav-link'><i class='fa fa-th me-2'></i>Aulas</a>
+            <a href='profesor.php' class='nav-item nav-link'><i class='fa fa-th me-2'></i>Profesor</a>
+            <a href='inscripcion.php' class='nav-item nav-link'><i class='fa fa-th me-2'></i>Inscripción</a>
+            <a href='clase.php' class='nav-item nav-link'><i class='fa fa-th me-2'></i>Clases</a>
 
 
 

@@ -9,18 +9,19 @@ switch($_GET["op"]) {
     case "listar":
         $ListaProfesores = array();
         $dato = $profesor->listarProfesores();
-
+    
         while($fila = mysqli_fetch_assoc($dato)) {
             $ListaProfesores[] = $fila;
         }
-
+    
+        header('Content-Type: application/json');
         if (!empty($ListaProfesores)) {
-            $json = json_encode($ListaProfesores);
-            echo $json;
+            echo json_encode($ListaProfesores);
         } else {
-            echo "No hay profesores registrados";
+            echo json_encode(['message' => 'No hay profesores registrados']);
         }
     break;
+    
 
     case "insertar":
         $datos = json_decode(file_get_contents("php://input"));

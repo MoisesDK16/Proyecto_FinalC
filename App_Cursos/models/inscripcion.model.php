@@ -9,7 +9,7 @@ class Clase_Inscripcion{
         $conexion = new Clase_Conectar();
         $con = $conexion->conectar();
 
-        $sql = "SELECT inc.id_inscripcion, e.id_estudiante, e.nombre, e.apellido, cur.nombre_curso FROM inscripciones as inc
+        $sql = "SELECT inc.id_inscripcion, e.id_estudiante, e.nombre, e.apellido, cur.nombre_curso, inc.fecha_inscripcion FROM inscripciones as inc
                INNER JOIN estudiantes as e ON e.id_estudiante = inc.id_estudiante
                INNER JOIN cursos as cur ON CUR.id_curso = inc.id_curso";
         
