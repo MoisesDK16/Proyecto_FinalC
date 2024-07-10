@@ -97,5 +97,4 @@ class Clase_Clase {
     
         return $respuesta;
     }
-    
 }
