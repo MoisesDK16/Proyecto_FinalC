@@ -67,26 +67,33 @@ class Clase_Inscripcion{
         $stmt->fetch();
         $stmt->close();
     
-        // Actualizar la inscripción con los nuevos valores
-        $sql = "UPDATE inscripciones 
-                SET id_estudiante = ?, id_curso = ?, fecha_inscripcion = CURRENT_DATE 
-                WHERE id_inscripcion = ?";
-        $stmt = $con->prepare($sql);
-        $stmt->bind_param("sii", $id_estudiante, $id_curso, $id_inscripcion);
-        
-        if ($stmt->execute()) {
-            $respuesta = array("message" => "Inscripción actualizada correctamente");
+        if ($id_curso) {
+            // Actualizar la inscripción con los nuevos valores
+            $sql = "UPDATE inscripciones 
+                    SET id_estudiante = (SELECT e.id_estudiante FROM estudiantes e WHERE e.id_estudiante = ?), 
+                        id_curso = ?, 
+                        fecha_inscripcion = CURRENT_DATE 
+                    WHERE id_inscripcion = ?";
+
+            $stmt = $con->prepare($sql);
+            $stmt->bind_param("sii", $id_estudiante, $id_curso, $id_inscripcion);
+    
+            if ($stmt->execute()) {
+                $respuesta = array("message" => "Inscripción actualizada correctamente");
+            } else {
+                $respuesta = array("message" => "Error al actualizar la inscripción: " . $stmt->error);
+            }
+    
+            $stmt->close();
         } else {
-            $respuesta = array("message" => "Error al actualizar la inscripción: " . $stmt->error);
+            $respuesta = array("message" => "Error: Curso no encontrado");
         }
     
-        // Cerrar la declaración y la conexión
-        $stmt->close();
         $con->close();
     
         return $respuesta;
-    }
-
+    }    
+    
 
     public function eliminarInscripcion($id_inscripcion) {
         $conexion = new Clase_Conectar();
@@ -109,9 +116,27 @@ class Clase_Inscripcion{
     }
     
     
+    public function uno($id_inscripcion){
+        $conexion = new Clase_Conectar();
+        $con = $conexion->conectar();
     
+        $sql = "SELECT inc.id_inscripcion, e.id_estudiante, e.nombre, e.apellido, cur.nombre_curso, inc.fecha_inscripcion 
+                FROM inscripciones as inc
+                INNER JOIN estudiantes as e ON e.id_estudiante = inc.id_estudiante
+                INNER JOIN cursos as cur ON cur.id_curso = inc.id_curso
+                WHERE inc.id_inscripcion = ?;";
     
-    
-       
-
+        $stmt = $con->prepare($sql);
+        if (!$stmt) {
+            die("Error en la preparación de la consulta: " . $con->error);
+        }
+        $stmt->bind_param("i", $id_inscripcion);
+        $stmt->execute();
+        $resultado = $stmt->get_result();
+        $fila = $resultado->fetch_assoc();
+        $stmt->close();
+        $con->close();
+        return $fila;
+    }    
+             
 }

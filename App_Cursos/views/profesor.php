@@ -56,7 +56,11 @@
                         </div>
                         <form id="frm_profesores">
                             <div class="modal-body">
-                                <input type="hidden" name="ProfesoresId" id="ProfesoresId">
+
+                                <div class="form-group">
+                                    <label for="ProfesoresId">Indentificacion</label>
+                                    <input type="text" name="ProfesoresId" id="ProfesoresId" placeholder="Inserte identificacion del Profesor" class="form-control" required>
+                                </div>    
 
                                 <div class="form-group">
                                     <label for="Nombre">Nombre</label>
@@ -96,11 +100,15 @@
 
                                 <div class="form-group">
                                     <label for="Nombre">Nombre</label>
-                                    <input type="text" name="Nombre" id="Nombre" placeholder="Inserte el Nombre del Profesor" class="form-control" required>
+                                    <input type="text" name="EditarNombre" id="EditarNombre" placeholder="Inserte el Nombre del Profesor" class="form-control" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="Departamento">Apellido</label>
+                                    <input type="text" name="EditarApellido" id="EditarApellido" placeholder="Seleccione el Departamento del Profesor" class="form-control" required>
                                 </div>
                                 <div class="form-group">
                                     <label for="Departamento">Departamento</label>
-                                    <input type="text" name="Departamento" id="Departamento" placeholder="Seleccione el Departamento del Profesor" class="form-control" required>
+                                    <input type="text" name="EditarDepartamento" id="EditarDepartamento" placeholder="Seleccione el Departamento del Profesor" class="form-control" required>
                                 </div>
                             </div>
                             <div class="modal-footer">
@@ -124,7 +132,7 @@
                     <table class="table table-bordered table-striped table-hover table-responsive">
                         <thead class="table-light">
                             <tr>
-                                <th>#</th>
+                                <th>Indentificacion</th>
                                 <th>Nombre</th>
                                 <th>Apellido</th>
                                 <th>Departamento</th>
