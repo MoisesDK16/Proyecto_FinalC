@@ -76,7 +76,7 @@ switch($_GET["op"]){
         } else {
             echo json_encode("Error: No se recibió el ID del curso");
         }
-    break;  
+    break;
     
     default:
         echo json_encode(array("message" => "Operación no válida"));

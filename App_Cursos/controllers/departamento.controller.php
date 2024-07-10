@@ -66,6 +66,10 @@ switch($_GET["op"]){
             echo json_encode("Error al eliminar");
         }
     break;
+    
+    default:
+        echo json_encode(array("message" => "Operación no válida"));
+        break;
 
 }
 
