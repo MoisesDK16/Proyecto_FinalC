@@ -59,7 +59,7 @@
                                 <input type="hidden" name="CursoId" id="CursoId">
                                 <div class="form-group">
                                     <label for="nombre" class="col-form-label">Nombre:</label>
-                                    <input type="text" class="form-control" name="nombre" id="nombre"
+                                    <input type="text" class="form-control" name="nombre_curso" id="nombre_curso"
                                         placeholder="Ingrese el nombre del Curso">
                                 </div>
                                 <div class="form-group">
@@ -70,17 +70,50 @@
                             </div>
                             <div class="modal-footer">
                                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-                                <button type="button" class="btn btn-primary" id="guardarCurso">Guardar</button>
+                                <button type="submit" class="btn btn-primary" >Guardar</button>
                             </div>
                         </form>
                     </div>
                 </div>
             </div>
-            <!-- Fin Nuevo Curso Modal -->
+
+
+            <!-- Nuevo Curso Modal -->
+            <div class="modal fade" id="modalCurso_Edit" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel">Editar Curso</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <form id="frm_cursos_Edit">
+                            <div class="modal-body">
+                                <input type="hidden" name="EditCursoId" id="EditCursoId">
+                                <div class="form-group">
+                                    <label for="nombre" class="col-form-label">Nombre:</label>
+                                    <input type="text" class="form-control" name="Editnombre" id="Editnombre"
+                                        placeholder="Ingrese el nombre del Curso">
+                                </div>
+                                <div class="form-group">
+                                    <label for="creditos" class="col-form-label">Créditos:</label>
+                                    <input type="number" class="form-control" name="Editcreditos" id="Editcreditos"
+                                        placeholder="Ingrese el Crédito del Curso">
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                                <button type="submit" class="btn btn-primary" id="EditguardarCurso">Actualizar</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+            
 
             <!-- Lista de Cursos -->
             <div class='container-fluid pt-4 px-4'>
-                <button type="button" class="btn btn-success mb-5" data-bs-toggle="modal" data-bs-target="#modalCurso">
+                <button id="btnGuardarCurso" type="button" class="btn btn-success mb-5" data-bs-toggle="modal" data-bs-target="#modalCurso">
                     <i class="bi bi-bag-plus-fill mx-2"></i> Añadir Curso
                 </button>
                 <div class='d-flex align-items-center justify-content-between mb-4'>

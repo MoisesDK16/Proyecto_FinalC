@@ -1,6 +1,9 @@
 function init() {
     $("#frm_cursos").on("submit", function (e) {
-        guardaryeditar(e);
+        guardarCurso(e);
+    });
+    $("#frm_cursos_Edit").on("submit", function (e) {
+        editar(e);
     });
 }
 
@@ -8,7 +11,7 @@ $(document).ready(() => {
     cargaTabla();
 });
 
-// Cargar la tabla de cursos
+
 var cargaTabla = () => {
     var html = "";
 
@@ -29,8 +32,8 @@ var cargaTabla = () => {
                         <td>${unCurso.nombre_curso}</td>
                         <td>${unCurso.creditos}</td>
                         <td>
-                            <button class="btn btn-primary" onclick="editar(${unCurso.id_curso})">Editar</button>
-                            <button class="btn btn-danger" onclick="eliminar(${unCurso.id_curso})">Eliminar</button>
+                            <button class="btn btn-primary" onclick="cargarCurso(${unCurso.id_curso})">Editar</button>
+                            <button class="btn btn-danger" onclick="eliminarCurso(${unCurso.id_curso})">Eliminar</button>
                         </td>
                     </tr>
                 `;
@@ -42,22 +45,32 @@ var cargaTabla = () => {
     });
 };
 
-// Guardar y editar curso
-var guardaryeditar = (e) => {
+
+var cargarCurso = (id_curso) => {
+    console.log("ID del curso:", id_curso);
+    $.get("../controllers/curso.controller.php?op=uno&id=" + id_curso, (data) => {
+        var Curso = JSON.parse(data); 
+        console.log("Curso encontrado:", Curso);
+        $("#EditCursoId").val(Curso.id_curso);
+        $("#Editnombre").val(Curso.nombre_curso);
+        $("#Editcreditos").val(Curso.creditos);
+        $("#modalCurso_Edit").modal("show"); 
+    }).fail(function() {
+        Swal.fire({
+            title: "Cursos",
+            text: "Ocurrió un error al intentar obtener los datos del curso",
+            icon: "error",
+        });
+    });
+};
+
+var guardarCurso = (e) => {
     e.preventDefault(); 
 
     var frm_cursos = new FormData($("#frm_cursos")[0]);
-    var CursoIdEdit = $("#CursoId").val();
+    console.log("Datos del formulario:", frm_cursos);
 
-    var ruta = "";
-    if (CursoIdEdit != "") {
-        // Actualizar
-        ruta = "../controllers/curso.controller.php?op=actualizar";
-    } else {
-        // Insertar
-        ruta = "../controllers/curso.controller.php?op=insertar";
-    }
-
+    var ruta = "../controllers/curso.controller.php?op=insertar";
     $.ajax({
         url: ruta,
         type: "POST",
@@ -67,17 +80,16 @@ var guardaryeditar = (e) => {
         
         success: function (datos) {
             console.log(datos);
-            location.reload(); // Recargar la página
             $("#modalCurso").modal("hide");
+            location.reload(); // Recargar la página después de ocultar el modal
         },
         error: function (xhr, status, error) {
-            console.error("Error al guardar o editar:", error);
+            console.error("Error al guardar el curso:", error);
         }
     });
 };
 
-// Eliminar curso
-var eliminar = (CursoId) => {
+var eliminarCurso = (CursoId) => {
     Swal.fire({
         title: "Cursos",
         text: "¿Está seguro que desea eliminar el curso?",
@@ -94,16 +106,16 @@ var eliminar = (CursoId) => {
                 data: { id_curso: CursoId },
                 success: (resultado) => {
                     console.log("Respuesta del servidor:", resultado);
-                    if (resultado === "Eliminado exitoso") {
+                    if (resultado.message === "Eliminado exitoso") {
                         Swal.fire({
-                            title: "Curso",
+                            title: "cursos",
                             text: "Se eliminó con éxito",
                             icon: "success",
                         });
-                        location.reload(); // Recargar la página
+                        cargaTabla();
                     } else {
                         Swal.fire({
-                            title: "Cursos", 
+                            title: "cursos",
                             text: "No se pudo eliminar",
                             icon: "error",
                         });
@@ -121,26 +133,31 @@ var eliminar = (CursoId) => {
     });
 };
 
-// Editar curso
-var editar = (CursoId) => { 
+
+
+
+var editar = (e) => {
+    e.preventDefault();
+    var frm_cursos_Edit = new FormData($("#frm_cursos_Edit")[0]);
+    console.log("Datos del formulario:", frm_cursos_Edit);
+    var ruta = "../controllers/curso.controller.php?op=actualizar";
+
     $.ajax({
-        url: `../controllers/curso.controller.php?op=uno&id=${CursoId}`,
-        type: "GET",
-        success: function (data) {
-            $("#CursoId").val(data.id_curso); 
-            $("#nombre").val(data.nombre_curso); 
-            $("#creditos").val(data.creditos);
-            // Mostrar el modal de edición
-            $("#modalCurso").modal("show");
+        url: ruta,
+        type: "POST",
+        data: frm_cursos_Edit,
+        processData: false,
+        contentType: false,
+        success: function (datos) {
+            console.log(datos);
+            location.reload();
+            $("#modalCurso_Edit").modal("hide");
         },
-        error: function () {
-            Swal.fire({
-                title: "Cursos",
-                text: "Ocurrió un error al intentar obtener los datos del curso",
-                icon: "error",
-            });
+        error: function (xhr, status, error) {
+            console.error("Error al actualizar:", error);
         },
     });
 };
+
 
 init();

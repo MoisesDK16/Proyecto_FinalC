@@ -12,7 +12,7 @@ switch($_GET["op"]){
         if (isset($_GET["id"])) {
             $idCurso = intval($_GET["id"]);
             $datos = $curso->uno($idCurso);
-            echo json_encode($datos); // Devuelve los datos del curso en formato JSON
+            echo json_encode($datos); 
         } else {
             echo json_encode(array("message" => "ID no proporcionado"));
         }
@@ -33,11 +33,11 @@ switch($_GET["op"]){
     break;
     
     case "insertar":
-        $nombre = $_POST["nombre"] ?? null;
+        $nombre_curso = $_POST["nombre_curso"] ?? null;
         $creditos = $_POST["creditos"] ?? null;
 
-        if (!empty($nombre) && !empty($creditos)) {
-            $registro = $curso->registrarCurso($nombre, $creditos);
+        if (!empty($nombre_curso) && !empty($creditos)) {
+            $registro = $curso->registrarCurso($nombre_curso, $creditos);
             echo json_encode($registro);
         } else {
             echo json_encode("Faltan Datos");
@@ -45,9 +45,13 @@ switch($_GET["op"]){
     break;
 
     case "actualizar":
-        $datos = json_decode(file_get_contents("php://input"));
-        if (!empty($datos->id_curso) && !empty($datos->nombre_curso) && !empty($datos->creditos)) {
-            $actualizado = $curso->actualizarCurso($datos->id_curso, $datos->nombre_curso, $datos->creditos);
+        
+        $id_curso = $_POST["EditCursoId"] ?? null;
+        $nombre_curso = $_POST["Editnombre"] ?? null;
+        $creditos = $_POST["Editcreditos"] ?? null;
+
+        if (!empty($id_curso) && !empty($nombre_curso) && !empty($creditos)) {
+            $actualizado = $curso->actualizarCurso($id_curso, $nombre_curso, $creditos);
             if ($actualizado) {
                 echo json_encode("Actualizado");
             } else {
@@ -58,15 +62,25 @@ switch($_GET["op"]){
         }
     break;
 
+
+
     case "eliminar":
-        if (isset($_GET["id"])) {
-            $id_curso = $_GET["id"];
+        if (isset($_POST["id_curso"])) {
+            $id_curso = intval($_POST["id_curso"]);
             $eliminado = $curso->eliminarCurso($id_curso);
-            echo json_encode($eliminado);
+            if ($eliminado) {
+                echo json_encode("Eliminado exitoso");
+            } else {
+                echo json_encode("Error al eliminar");
+            }
         } else {
-            echo json_encode("Error al eliminar");
+            echo json_encode("Error: No se recibió el ID del curso");
         }
-    break;   
+    break;  
+    
+    default:
+        echo json_encode(array("message" => "Operación no válida"));
+        break;
 }
 
 ?>
