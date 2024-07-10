@@ -54,7 +54,12 @@
                         </div>
                         <form id="frm_estudiantes">
                             <div class="modal-body">
-                                <input type="hidden" name="EstudiantesId" id="EstudiantesId">
+                                <!-- <input type="hidden" name="EstudiantesId" id="EstudiantesId"> -->
+
+                                <div class="form-group">
+                                    <label for="Nombre">Identificacion</label>
+                                    <input type="text" name="EstudiantesId" id="EstudiantesId" placeholder="Ingrese el nombre del estudiante" class="form-control" required>
+                                </div>
 
                                 <div class="form-group">
                                     <label for="Nombre">Nombre</label>
@@ -92,16 +97,16 @@
                                 <input type="hidden" name="EditarEstudianteId" id="EditarEstudianteId">
 
                                 <div class="form-group">
-                                    <label for="Nombre">Nombre</label>
-                                    <input type="text" name="Nombre" id="Nombre" placeholder="Ingrese el nombre del estudiante" class="form-control" required>
+                                    <label for="NombreE">Nombre</label>
+                                    <input type="text" name="NombreE" id="NombreE" placeholder="Ingrese el nombre del estudiante" class="form-control" required>
                                 </div>
                                 <div class="form-group">
-                                    <label for="Apellido">Apellido</label>
-                                    <input type="text" name="Apellido" id="Apellido" placeholder="Ingrese el apellido del estudiante" class="form-control" required>
+                                    <label for="ApellidoE">Apellido</label>
+                                    <input type="text" name="ApellidoE" id="ApellidoE" placeholder="Ingrese el apellido del estudiante" class="form-control" required>
                                 </div>
                                 <div class="form-group">
-                                    <label for="FechaNacimiento">Fecha Nacimiento</label>
-                                    <input type="text" name="FechaNacimiento" id="FechaNacimiento" placeholder="Ingrese la fecha de nacimiento del estudiante" class="form-control" required>
+                                    <label for="FechaNacimientoE">Fecha Nacimiento</label>
+                                    <input type="text" name="FechaNacimientoE" id="FechaNacimientoE" placeholder="Ingrese la fecha de nacimiento del estudiante" class="form-control" required>
                                 </div>
                             </div>
                             <div class="modal-footer">

@@ -73,6 +73,33 @@
             </div>
             <!-- Fin Nuevo Departamento Modal -->
 
+            <!-- Editar Departamento Modal -->
+            <div class="modal fade" id="modalEditarDepartamento" tabindex="-1" aria-labelledby="editarDepartamentoLabel"
+                aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="editarDepartamentoLabel">Editar Departamento</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <form id="frm_editar_departamento">
+                            <div class="modal-body">
+                                <input type="hidden" name="EditarDepartamentoId" id="EditarDepartamentoId">
+
+                                <div class="form-group">
+                                    <label for="Nombre">Nombre</label>
+                                    <input type="text" name="EditarNombre" id="EditarNombre" placeholder="Ingrese el nombre del Departamento" class="form-control" required>
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="submit" class="btn btn-primary" id="EditguardarDepartamento">Actualizar</button>
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>            
+
             <!-- Lista de Departamentos -->
             <div class='container-fluid pt-4 px-4'>
                 <button type="button" class="btn btn-success mb-5" data-bs-toggle="modal" data-bs-target="#modalDepartamento">

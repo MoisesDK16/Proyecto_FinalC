@@ -1,7 +1,11 @@
 // Inicialización
 function init() {
     $("#frm_departamentos").on("submit", function (e) {
-        guardaryeditar(e);
+        guardarDepartamento(e);
+    });
+
+    $("#frm_editar_departamento").on("submit", function (e) {
+        editarDepartamento(e);
     });
 }
 
@@ -29,7 +33,7 @@ var cargaTabla = () => {
                         <td>${indice + 1}</td>
                         <td>${unDepartamento.nombre_departamento}</td>
                         <td>
-                            <button class="btn btn-primary" onclick="editar(${unDepartamento.id_departamento})">Editar</button>
+                            <button class="btn btn-primary" onclick="cargarDepartamento(${unDepartamento.id_departamento})">Editar</button>
                             <button class="btn btn-danger" onclick="eliminar(${unDepartamento.id_departamento})">Eliminar</button>
                         </td>
                     </tr>
@@ -42,22 +46,40 @@ var cargaTabla = () => {
     });
 };
 
-// Guardar y editar departamento
-var guardaryeditar = (e) => {
+// var cargarDepartamento = (id) => {
+//     $.get("../controllers/departamento.controller.php?op=uno&id=" + id, (Departamento) => {
+//         console.log(Departamento);
+//         $("#EditarDepartamentoId").val(Departamento.id_departamento);
+//         $("#EditarNombre").val(Departamento.nombre_departamento);
+//         $("#modalEditarDepartamento").modal("show");
+//     });
+// };
+
+var cargarDepartamento = (id_departamento) => {
+    console.log("ID del departamento:", id_departamento);
+    $.get("../controllers/departamento.controller.php?op=uno&id=" + id_departamento, (data) => {
+        var Departamento = JSON.parse(data); 
+        console.log("Departamento encontrado:", Departamento);
+        $("#EditarDepartamentoId").val(Departamento.id_departamento);
+        $("#EditarNombre").val(Departamento.nombre_departamento);
+        $("#modalEditarDepartamento").modal("show"); 
+    }).fail(function() {
+        Swal.fire({
+            title: "Departamento",
+            text: "Ocurrió un error al intentar obtener los datos del Departamento",
+            icon: "error",
+        });
+    });
+};
+
+// Función para Guardar un Departamento
+var guardarDepartamento = (e) => {
     e.preventDefault();
 
     var frm_departamentos = new FormData($("#frm_departamentos")[0]);
+    frm_departamentos.delete("DepartamentoId");
 
-    var idDepartamentoEdit = $("#DepartamentoId").val();
-
-    var ruta = "";
-    if (idDepartamentoEdit != "") {
-        // Actualizar
-        ruta = "../controllers/departamento.controller.php?op=actualizar";
-    } else {
-        // Insertar
-        ruta = "../controllers/departamento.controller.php?op=insertar";
-    }
+    var ruta = "../controllers/departamento.controller.php?op=insertar";
 
     $.ajax({
         url: ruta,
@@ -67,11 +89,11 @@ var guardaryeditar = (e) => {
         processData: false,
         success: function (datos) {
             console.log(datos);
-            location.reload(); // Recargar la página
+            location.reload();
             $("#modalDepartamento").modal("hide");
         },
         error: function (xhr, status, error) {
-            console.error("Error al guardar o editar:", error);
+            console.error("Error al guardar:", error);
         }
     });
 };
@@ -121,32 +143,28 @@ var eliminar = (DepartamentoId) => {
     });
 };
 
-// Editar departamento
-var editar = (DepartamentoId) => {
-    $.ajax({
-        url: `../controllers/departamento.controller.php?op=uno&id=${DepartamentoId}`,
-        type: "GET",
-        success: function (data) {
-            let departamento;
-            try {
-                departamento = JSON.parse(data);
-            } catch (e) {
-                console.error("Error parsing JSON:", e);
-                return;
-            }
+// Función para Editar un Departamento
+var editarDepartamento = (e) => {
+    e.preventDefault();
 
-            $("#DepartamentoId").val(departamento.id_departamento);
-            $("#Nombre").val(departamento.nombre_departamento);
-            // Mostrar el modal de edición
-            $("#modalDepartamento").modal("show");
+    var frm_editar_departamento = new FormData($("#frm_editar_departamento")[0]);
+    console.log("Datos del formulario:", frm_editar_departamento);
+    var ruta = "../controllers/departamento.controller.php?op=actualizar";
+
+    $.ajax({
+        url: ruta,
+        type: "POST",
+        data: frm_editar_departamento,
+        contentType: false,
+        processData: false,
+        success: function (datos) {
+            console.log(datos);
+            location.reload();
+            $("#modalEditarDepartamento").modal("hide");
         },
-        error: function () {
-            Swal.fire({
-                title: "Departamentos",
-                text: "Ocurrió un error al intentar obtener los datos del departamento",
-                icon: "error",
-            });
-        },
+        error: function (xhr, status, error) {
+            console.error("Error al actualizar:", error);
+        }
     });
 };
 

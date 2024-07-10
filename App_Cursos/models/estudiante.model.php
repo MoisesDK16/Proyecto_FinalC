@@ -4,6 +4,31 @@ require_once("../config/conexion.php");
 
 class Clase_Estudiante{
 
+    public function uno($id_estudiante) {
+        $conexion = new Clase_Conectar();
+        $con = $conexion->conectar();
+    
+        $sql = "SELECT id_estudiante, nombre, apellido, fecha_nacimiento FROM estudiantes WHERE id_estudiante = ?";
+        $stmt = mysqli_prepare($con, $sql);
+        mysqli_stmt_bind_param($stmt, "s", $id_estudiante);
+        mysqli_stmt_execute($stmt);
+        mysqli_stmt_bind_result($stmt, $id_estudiante, $nombre, $apellido, $fecha_nacimiento);
+        mysqli_stmt_fetch($stmt);
+    
+        $datos = array(
+            'id_estudiante' => $id_estudiante,
+            'nombre' => $nombre,
+            'apellido' => $apellido,
+            'fecha_nacimiento' => $fecha_nacimiento
+        );
+    
+        mysqli_stmt_close($stmt);
+        $con->close();
+        
+        return $datos;
+    }
+    
+
     public function listar_estudiantes(){
         $conexion= new Clase_Conectar();
         $con = $conexion->conectar();

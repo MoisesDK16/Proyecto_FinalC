@@ -88,12 +88,12 @@
                                 <input type="hidden" name="EditarAulaId" id="EditarAulaId">
 
                                 <div class="form-group">
-                                    <label for="NumAula">Numero Aula</label>
-                                    <input type="text" name="NumAula" id="NumAula" placeholder="Ingrese el numero de aula" class="form-control" required>
+                                    <label for="NumAulaE">Numero Aula</label>
+                                    <input type="text" name="NumAulaE" id="NumAulaE" placeholder="Ingrese el numero de aula" class="form-control" required>
                                 </div>
                                 <div class="form-group">
-                                    <label for="Capacidad">Capacidad</label>
-                                    <input type="text" name="Capacidad" id="Capacidad" placeholder="Ingrese la capacidad del aula" class="form-control" required>
+                                    <label for="CapacidadE">Capacidad</label>
+                                    <input type="text" name="CapacidadE" id="CapacidadE" placeholder="Ingrese la capacidad del aula" class="form-control" required>
                                 </div>
                             </div>
                             <div class="modal-footer">
@@ -108,7 +108,7 @@
 
             <!-- Lista de Aula -->
             <div class='container-fluid pt-4 px-4'>
-                <button type="button" class="btn btn-primary " data-bs-toggle="modal" data-bs-target="#modalEditarAula">
+                <button type="button" class="btn btn-primary " data-bs-toggle="modal" data-bs-target="#modalAula">
                     Nueva Aula
                 </button>
                 <div class='d-flex align-items-center justify-content-between mb-4'>

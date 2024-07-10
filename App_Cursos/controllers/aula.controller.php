@@ -1,57 +1,96 @@
- <?php 
- require_once("../models/aula.model.php");
+<?php
 
-$aula = new Clase_Aula(); 
+require_once('../models/aula.model.php');
 
-switch($_GET["op"]){
+$aula = new Clase_Aula();
 
-    case "insertar":
-        $datos = json_decode(file_get_contents("php://input"));
-
-        if(!empty($datos->numero_aula && $datos->capacidad)){
-            $aula->registrarAula($datos->numero_aula, $datos->capacidad);
-            echo "Aula registrada";
-        }else{
-            echo "Error al registrar aula";
-        }
-        
-    break;
-
-    case "listar": 
+switch ($_GET["op"]) {
+    /* Procedimiento para listar todos los registros */
+    case 'listar':
+        $datos = array();
+        $datos = $aula->listarAulas();
         $aulas = array();
-        $dato = $aula->listarAulas();
-        while ($fila = mysqli_fetch_assoc($dato)) {
-            $aulas[] = $fila;
+        while ($row = mysqli_fetch_assoc($datos)) {
+            $aulas[] = $row;
         }
-    
-        if (!empty($aulas)) {
-            echo json_encode($aulas);
-        } else {
-            echo json_encode(array("message" => "No hay aulas disponibles"));
-        }
-    
+        echo json_encode($aulas);
         break;
-    
-
-    case "actualizar":
-        $datos = json_decode(file_get_contents("php://input"));
-        $aula->actualizarAula($datos->numero_aula, $datos->capacidad, $datos->id_aula);
-
-        if($aula){
-            echo "Aula actualizada";
-        }else{
-            echo "Error al actualizar aula";
+        
+    /* Procedimiento para sacar un registro */
+    case 'uno':
+        if (isset($_GET["id"])) {
+            $idAula = intval($_GET["id"]);
+            $datos = $aula->uno($idAula);
+            echo json_encode($datos); // Devuelve los datos del aula en formato JSON
+        } else {
+            echo json_encode(array("message" => "ID no proporcionado"));
         }
-    break;
+        break;
 
-    case "eliminar":
-        $datos = json_decode(file_get_contents("php://input"));
-        $aula->eliminarAula($datos->numero_aula);
-        if($aula){
-            echo "Aula eliminada";
-        }else{
-            echo "Error al eliminar aula";
+    /* Procedimiento para insertar */
+    case 'insertar':
+        $NumAula = $_POST["NumAula"] ?? null;
+        $Capacidad = $_POST["Capacidad"] ?? null;
+        
+        if ($NumAula && $Capacidad) {
+            $insertar = $aula->registrarAula($NumAula, $Capacidad);
+            if ($insertar) {
+                echo json_encode(array("message" => "Aula registrada correctamente"));
+            } else {
+                echo json_encode(array("message" => "Error al registrar aula"));
+            }
+        } else {
+            echo json_encode(array("message" => "Error, faltan datos"));
         }
+        break;
+        
+    /* Procedimiento para actualizar */
+    case 'actualizar':
 
-    break;
+        // $datos = json_decode(file_get_contents("php://input"));
+
+        // if(!empty($datos->id_aula) && !empty($datos->numero_aula) && !empty($datos->capacidad)){
+        //     $aula->actualizarAula($datos->numero_aula,$datos->capacidad,$datos->id_aula);
+        //     echo json_encode(array("message" => "Aula actualizada correctamente"));
+ 
+        // }else{
+        //     echo json_encode(array("message" => "Error, faltan datos"));
+        // }
+
+
+        $id_aula = $_POST["EditarAulaId"] ?? null;
+        $numero_aula = $_POST["NumAulaE"] ?? null;
+        $capacidad = $_POST["CapacidadE"] ?? null;
+        
+        if ($id_aula && $numero_aula && $capacidad) {
+            $actualizar = $aula->actualizarAula($numero_aula, $capacidad, $id_aula);
+            if ($actualizar) {
+                echo json_encode(array("message" => "Aula actualizada correctamente"));
+            } else {
+                echo json_encode(array("message" => "Error al actualizar aula"));
+            }
+        } else {
+            echo json_encode(array("message" => "Error, faltan datos"));
+        }
+        break;
+        
+    /* Procedimiento para eliminar */
+    case 'eliminar':
+        if (isset($_POST["id_aula"])) {
+            $id_aula = intval($_POST["id_aula"]);
+            $eliminar = $aula->eliminarAula($id_aula);
+            if ($eliminar) {
+                echo json_encode(array("message" => "Aula eliminada correctamente"));
+            } else {
+                echo json_encode(array("message" => "Error al eliminar aula"));
+            }
+        } else {
+            echo json_encode(array("message" => "ID no proporcionado"));
+        }
+        break;
+
+    default:
+        echo json_encode(array("message" => "Operación no válida"));
+        break;
 }
+?>

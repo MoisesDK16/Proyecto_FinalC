@@ -4,6 +4,19 @@ require_once("../config/conexion.php");
 
 class Clase_Aula{
 
+    public function uno($id_aula){
+        $conexion = new Clase_Conectar();
+        $con = $conexion->conectar();
+        $sql = "SELECT * FROM aulas WHERE id_aula = ?";
+        $stmt = $con->prepare($sql);
+        $stmt->bind_param("i", $id_aula);
+        $stmt->execute();
+        $result = $stmt->get_result();
+        $aula = $result->fetch_assoc();
+        $con->close();
+        return $aula;
+    }
+    
     public function registrarAula($numero_aula, $capacidad){
         $conexion = new Clase_Conectar();
         $con = $conexion->conectar();

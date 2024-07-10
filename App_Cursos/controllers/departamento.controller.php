@@ -42,10 +42,10 @@ switch($_GET["op"]){
     break;
 
     case "actualizar":
-        $DepartamentoId = $_POST["DepartamentoId"] ?? null;
-        $Nombre = $_POST["Nombre"] ?? null;
+        $DepartamentoId = $_POST["EditarDepartamentoId"] ?? null;
+        $Nombre = $_POST["EditarNombre"] ?? null;
 
-        if (!empty($DepartamentoId) && !empty($Nombre)) {
+        if ($DepartamentoId && $Nombre) {
             $actualizado = $departamento->actualizarDepartamento($DepartamentoId, $Nombre);
             if ($actualizado) {
                 echo json_encode("Actualizado");
@@ -66,7 +66,7 @@ switch($_GET["op"]){
             echo json_encode("Error al eliminar");
         }
     break;
-    
+
     default:
         echo json_encode(array("message" => "Operación no válida"));
         break;
