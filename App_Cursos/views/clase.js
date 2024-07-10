@@ -1,7 +1,11 @@
 // Inicialización
 function init() {
     $("#frm_clases").on("submit", function (e) {
-        guardaryeditar(e);
+        guardar(e);
+    });
+
+    $("#frm_editar_clase").on("submit", function (e) {
+        editar(e);
     });
 }
 
@@ -35,7 +39,7 @@ var cargaTabla = () => {
                         <td>${unClase.numero_aula}</td>
                         <td>${unClase.horario}</td>
                         <td>
-                            <button class="btn btn-primary" onclick="editar(${unClase.id_clase})">Editar</button>
+                            <button class="btn btn-primary" onclick="cargarClase(${unClase.id_clase})">Editar</button>
                             <button class="btn btn-danger" onclick="eliminar(${unClase.id_clase})">Eliminar</button>
                         </td>
                     </tr>
@@ -47,3 +51,70 @@ var cargaTabla = () => {
         }
     });
 };
+
+
+var cargarClase = (id_clase) => {
+    $.get("../controllers/clase.controller.php?op=uno&id=" + id_clase, (data) => {
+        var Clase = JSON.parse(data);
+        console.log("Clase encontrada:", Clase);
+        $("#EditarClaseId").val(Clase.id_clase);
+        $("#EditarClaseCurso").val(Clase.nombre_curso);
+        $("#EditarClaseProfesor").val(Clase.id_profesor);
+        $("#EditarClaseAula").val(Clase.numero_aula);
+        $("#EditarClaseHorario").val(Clase.horario);
+        $("#modalEditarClase").modal("show");
+    });
+}
+
+var guardar = (e) => {
+    
+    e.preventDefault();
+
+    var frm_clases= new FormData($("#frm_clases")[0]);
+    console.log("Datos del formulario:", frm_clases);
+
+    var ruta = "../controllers/clase.controller.php?op=insertar";
+
+    $.ajax({
+        url: ruta,
+        type: "POST",
+        data: frm_clases,
+        contentType: false,
+        processData: false,
+        success: function (datos) {
+            console.log(datos);
+            location.reload();
+            $("#modalClase").modal("hide");
+        },
+        error: function (xhr, status, error) {
+            console.error("Error al guardar:", error);
+        }
+    });
+}
+
+
+var editar = (e) => {
+    e.preventDefault();
+
+    var frm_editar_clase = new FormData($("#frm_editar_clase")[0]);
+    var ruta = "../controllers/clase.controller.php?op=actualizar";
+
+    $.ajax({
+        url: ruta,
+        type: "POST",
+        data: frm_editar_clase,
+        contentType: false,
+        processData: false,
+        success: function (datos) {
+            console.log(datos);
+            $("#modalEditarClase").modal("hide");
+            cargaTabla();
+        },
+        error: function (xhr, status, error) {
+            console.error("Error al actualizar:", error);
+        }
+    });
+};
+
+
+init();

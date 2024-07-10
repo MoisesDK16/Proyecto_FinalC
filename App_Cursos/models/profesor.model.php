@@ -10,8 +10,11 @@ class Clase_Profesor{
         $sql = "SELECT pro.id_profesor, pro.nombre_profesor, pro.apellido_profesor, d.nombre_departamento 
                 FROM profesores AS pro
                 INNER JOIN departamentos AS d ON d.id_departamento = pro.id_departamento;";
-        $datos = $con->query($sql);
-        return $datos;
+        
+        $stmt = $con->prepare($sql);
+        $stmt->execute();
+        $result = $stmt->get_result();    
+        return $result;
     }
 
     public function registrarProfesor($id_profesor, $nombre_profesor, $apellido_profesor, $nombre_departamento) {
@@ -83,4 +86,20 @@ class Clase_Profesor{
 
         return $respuesta;
     }
+
+    public function uno($id_profesor){
+        $conectar = new Clase_Conectar();
+        $con = $conectar->conectar();
+        
+        $sql = "SELECT pro.id_profesor, pro.nombre_profesor, pro.apellido_profesor, d.nombre_departamento FROM profesores pro 
+        INNER JOIN departamentos d ON d.id_departamento = pro.id_departamento
+        WHERE pro.id_profesor = ? ";
+
+        $stmt = $con->prepare($sql);
+        $stmt->bind_param("s", $id_profesor);
+        $stmt->execute();
+        $result = $stmt->get_result()->fetch_assoc();
+        return $result;
+    }
+
 }

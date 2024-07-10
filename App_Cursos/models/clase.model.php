@@ -97,4 +97,29 @@ class Clase_Clase {
     
         return $respuesta;
     }
+
+
+    public function uno($id_clase) {
+        $conectar = new Clase_Conectar();
+        $con = $conectar->conectar();
+
+        $sql = "SELECT cla.id_clase, cur.nombre_curso, pro.id_profesor, pro.nombre_profesor, pro.apellido_profesor, dep.nombre_departamento, au.numero_aula, cla.horario
+                FROM clases as cla
+                INNER JOIN cursos cur ON cur.id_curso = cla.id_curso
+                INNER JOIN profesores pro ON pro.id_profesor = cla.id_profesor
+                INNER JOIN departamentos dep ON dep.id_departamento = pro.id_departamento
+                INNER JOIN aulas au ON au.id_aula = cla.id_aula
+                WHERE cla.id_clase = ?";
+                
+        $stmt = $con->prepare($sql);
+        $stmt->bind_param("i", $id_clase);
+        $stmt->execute();
+        $resultado = $stmt->get_result();
+        $datos = $resultado->fetch_assoc();
+
+        $stmt->close();
+        $con->close();
+
+        return $datos;
+    }
 }

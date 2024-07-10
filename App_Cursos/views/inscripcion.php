@@ -7,15 +7,15 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
     <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
     <style>
-    .custom-flatpickr {
-        display: flex;
-        align-items: center;
-    }
+        .custom-flatpickr {
+            display: flex;
+            align-items: center;
+        }
 
-    .custom-flatpickr input {
-        margin-right: 5px;
-        flex: 1;
-    }
+        .custom-flatpickr input {
+            margin-right: 5px;
+            flex: 1;
+        }
     </style>
 
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
@@ -24,8 +24,7 @@
 <body>
     <div class='container-xxl position-relative bg-white d-flex p-0'>
         <!-- Spinner Start -->
-        <div id='spinner'
-            class='show bg-white position-fixed translate-middle w-100 vh-100 top-50 start-50 d-flex align-items-center justify-content-center'>
+        <div id='spinner' class='show bg-white position-fixed translate-middle w-100 vh-100 top-50 start-50 d-flex align-items-center justify-content-center'>
             <div class='spinner-border text-primary' style='width: 3rem; height: 3rem;' role='status'>
                 <span class='sr-only'>Cargando...</span>
             </div>
@@ -46,8 +45,7 @@
 
 
             <!-- Nuevo Inscripcion Modal -->
-            <div class="modal fade" id="modalInscripcion" tabindex="-1" aria-labelledby="exampleModalLabel"
-                aria-hidden="true">
+            <div class="modal fade" id="modalInscripcion" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                 <div class="modal-dialog">
                     <div class="modal-content">
                         <div class="modal-header">
@@ -56,7 +54,7 @@
                         </div>
                         <form id="frm_inscripciones">
                             <div class="modal-body">
-                                <input type="hidden" name="InscripcionesId" id="InscripcionesId">
+                                <!-- <input type="hidden" name="InscripcionesId" id="InscripcionesId"> -->
 
                                 <div class="form-group">
                                     <label for="Estudiante">Estudiante</label>
@@ -94,16 +92,28 @@
                                 <input type="hidden" name="EditarInscripcionesId" id="EditarInscripcionesId">
 
                                 <div class="form-group">
-                                    <label for="Estudiante">Estudiante</label>
-                                    <input type="text" name="Estudiante" id="Estudiante" placeholder="Seleccione el Nombre del Estudiante" class="form-control" required>
+                                    <label for="Estudiante">Cedula_Estudiante</label>
+                                    <input type="text" name="EditarCedula_Estudiante" id="EditarCedula_Estudiante" placeholder="Seleccione cedula del Estudiante" class="form-control" required>
                                 </div>
+
+                                <div class="form-group">
+                                    <label for="Estudiante">Nombre</label>
+                                    <input type="text" name="EditarNombre" id="EditarNombre" placeholder="Seleccione el Nombre del Estudiante" class="form-control" required>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="Estudiante">Apellido</label>
+                                    <input type="text" name="EditarApellido" id="EditarApellido" placeholder="Seleccione el Apellido del Estudiante" class="form-control" required>
+                                </div>
+
                                 <div class="form-group">
                                     <label for="Curso">Curso</label>
-                                    <input type="text" name="Curso" id="Curso" placeholder="Seleccione el Curso del Estudiante" class="form-control" required>
+                                    <input type="text" name="EditarCurso" id="EditarCurso" placeholder="Seleccione el Curso del Estudiante" class="form-control" required>
                                 </div>
+
                                 <div class="form-group">
-                                    <label for="FechaInscripcion">Fecha Inscripcion</label>
-                                    <input type="text" name="FechaInscripcion" id="FechaInscripcion" placeholder="Escriba la fecha de inscripcion" class="form-control" required>
+                                    <label for="FechaInscripcion">Fecha Inscripción</label>
+                                    <input type="text" name="EditarFechaInscripcion" id="EditarFechaInscripcion" placeholder="Escriba la fecha de inscripción" class="form-control" required>
                                 </div>
                             </div>
                             <div class="modal-footer">
@@ -111,6 +121,7 @@
                                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
                             </div>
                         </form>
+
                     </div>
                 </div>
             </div>
@@ -127,7 +138,9 @@
                         <thead class="table-light">
                             <tr>
                                 <th>#</th>
-                                <th>Estudiante</th>
+                                <th>Cedula_Estudiante</th>
+                                <th>Nombre</th>
+                                <th>Apellido</th>
                                 <th>Curso</th>
                                 <th>Fecha Inscripcion</th>
                             </tr>

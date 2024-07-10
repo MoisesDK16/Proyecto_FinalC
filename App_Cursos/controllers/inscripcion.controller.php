@@ -23,27 +23,50 @@ switch($_GET["op"]){
     break;
 
     case "insertar":
-        $datos = json_decode(file_get_contents("php://input"));
 
-        if($datos->id_estudiante == null || $datos->nombre_curso == null){
+        $id_estudiante = $_POST["Estudiante"];
+        $nombre_curso = $_POST["Curso"];
+
+        if(!empty($id_estudiante) && !empty($nombre_curso)){
+            $respuesta = $inscripcion->registrarInscripcion($id_estudiante, $nombre_curso);
+            echo json_encode($respuesta);  
+        }else{
             echo json_encode(array("message" => "Todos los campos son obligatorios"));
-        } else {
-            $respuesta = $inscripcion->registrarInscripcion($datos->id_estudiante, $datos->nombre_curso);
-            echo json_encode($respuesta);
         }
+        
+        // $datos = json_decode(file_get_contents("php://input"));
+
+        // if($datos->id_estudiante == null || $datos->nombre_curso == null){
+        //     echo json_encode(array("message" => "Todos los campos son obligatorios"));
+        // } else {
+        //     $respuesta = $inscripcion->registrarInscripcion($datos->id_estudiante, $datos->nombre_curso);
+        //     echo json_encode($respuesta);
+        // }
     break;
 
     case "actualizar":
-        $datos = json_decode(file_get_contents("php://input"));
 
-        if ($datos->id_inscripcion == null || $datos->id_estudiante == null || $datos->nombre_curso == null) {
-            echo json_encode(array("message" => "Todos los campos son obligatorios"));
-        } else {
-            // Llamar al método de actualización del modelo
-            $respuesta = $inscripcion->actualizarInscripcion($datos->id_inscripcion, $datos->id_estudiante, $datos->nombre_curso);
+        $id_inscripcion = $_POST["EditarInscripcionesId"];
+        $id_estudiante = $_POST["EditarCedula_Estudiante"];
+        $nombre_curso = $_POST["EditarCurso"];
+    
+        if (!empty($id_inscripcion) && !empty($id_estudiante) && !empty($nombre_curso)) {
+            $respuesta = $inscripcion->actualizarInscripcion($id_inscripcion, $id_estudiante, $nombre_curso);
             echo json_encode($respuesta);
+        } else {
+            echo json_encode(array("message" => "Todos los campos son obligatorios"));
         }
-    break;
+
+        // $datos = json_decode(file_get_contents("php://input"));
+        // if (!empty($datos->id_inscripcion) && !empty($datos->id_estudiante) && !empty($datos->nombre_curso)) {
+        //     $respuesta = $inscripcion->actualizarInscripcion($datos->id_inscripcion, $datos->id_estudiante, $datos->nombre_curso);
+        //     echo json_encode($respuesta);
+        // }else{
+        //     echo json_encode(array("message" => "Todos los campos son obligatorios"));
+        // }
+
+        break;    
+      
 
     case "eliminar":
         $datos = json_decode(file_get_contents("php://input"));
@@ -57,5 +80,15 @@ switch($_GET["op"]){
 
         echo json_encode($respuesta);
     break; 
-    
+
+    case "uno":
+        if(isset($_GET["id"])){
+            $id = intval($_GET["id"]);
+            $dato = $inscripcion->uno($id);
+            echo json_encode($dato);
+        } else {
+            echo json_encode(array("message" => "Se requiere el ID de inscripción para obtener los datos"));
+        } 
+
+    break;       
 }

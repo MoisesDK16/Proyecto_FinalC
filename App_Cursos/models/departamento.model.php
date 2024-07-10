@@ -20,7 +20,7 @@ class Departamento_Clase {
     public function uno($idDepartamento)
     {
         $con = new Clase_Conectar();
-        $con = $con->Procedimiento_Conectar();
+        $con = $con->conectar();
 
         $cadena = "SELECT id_departamento, nombre_departamento FROM departamentos WHERE id_departamento  = ?";
         $stmt = $con->prepare($cadena);

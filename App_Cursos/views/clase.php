@@ -56,7 +56,7 @@
                         </div>
                         <form id="frm_clases">
                             <div class="modal-body">
-                                <input type="hidden" name="ClasesId" id="ClasesId">
+                                <!-- <input type="hidden" name="ClasesId" id="ClasesId"> -->
 
                                 <div class="form-group">
                                     <label for="Curso">Curso</label>
@@ -65,7 +65,7 @@
                                 </div>
                                 <div class="form-group">
                                     <label for="Profesor">Profesor</label>
-                                    <input type="text" name="Profesor" id="Profesor"
+                                    <input type="text" name="ID_Profesor" id="ID_Profesor"
                                         placeholder="Seleccione el Profesor" class="form-control" required>
                                 </div>
                                 <div class="form-group">
@@ -105,22 +105,22 @@
 
                                 <div class="form-group">
                                     <label for="Curso">Curso</label>
-                                    <input type="text" name="Curso" id="Curso" placeholder="Seleccione el Curso"
+                                    <input type="text" name="EditarClaseCurso" id="EditarClaseCurso" placeholder="Seleccione el Curso"
                                         class="form-control" required>
                                 </div>
                                 <div class="form-group">
                                     <label for="Profesor">Profesor</label>
-                                    <input type="text" name="Profesor" id="Profesor"
+                                    <input type="text" name="EditarClaseProfesor" id="EditarClaseProfesor"
                                         placeholder="Seleccione el Profesor" class="form-control" required>
                                 </div>
                                 <div class="form-group">
                                     <label for="Aula">Aula</label>
-                                    <input type="text" name="Aula" id="Aula" placeholder="Seleccione el Aula"
+                                    <input type="text" name="EditarClaseAula" id="EditarClaseAula" placeholder="Seleccione el Aula"
                                         class="form-control" required>
                                 </div>
                                 <div class="form-group">
                                     <label for="Horario">Horario</label>
-                                    <input type="text" name="Horario" id="Horario" placeholder="Seleccione el Horario"
+                                    <input type="text" name="EditarClaseHorario" id="EditarClaseHorario" placeholder="Seleccione el Horario"
                                         class="form-control" required>
                                 </div>
                             </div>
