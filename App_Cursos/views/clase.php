@@ -78,8 +78,11 @@
                                 </div>
                                 <div class="form-group">
                                     <label for="Horario">Horario</label>
-                                    <input type="text" name="Horario" id="Horario" placeholder="Seleccione el Horario"
-                                        class="form-control" required>
+                                    <!-- <input type="text" name="Horario" id="Horario" placeholder="Seleccione el Horario"
+                                        class="form-control" required> -->
+                                        <select class="form-control mb-3" name="Horario" id="Horario">
+
+                                        </select>
                                 </div>
                             </div>
                             <div class="modal-footer">
@@ -123,8 +126,11 @@
 
                                 <div class="form-group">
                                     <label for="Horario">Horario</label>
-                                    <input type="text" name="EditarClaseHorario" id="EditarClaseHorario" placeholder="Seleccione el Horario"
-                                        class="form-control" required>
+                                    <!-- <input type="text" name="EditarClaseHorario" id="EditarClaseHorario" placeholder="Seleccione el Horario"
+                                        class="form-control" required> -->
+                                        <select class="form-control mb-3" name="EditarClaseHorario" id="EditarClaseHorario">
+
+                                        </select>
                                 </div>
                             </div>
                             <div class="modal-footer">

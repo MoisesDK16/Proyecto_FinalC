@@ -77,6 +77,29 @@ switch($_GET["op"]){
         } else {
             echo json_encode(array("message" => "Se requiere el ID de inscripción para obtener los datos"));
         } 
+    break;  
+    
+    case "unoEstudiante":
 
-    break;       
+        // $datos = json_decode(file_get_contents("php://input"));
+        
+        // if($datos->id){
+        //     $id = intval($datos->id);
+        //     $inscripciones = $inscripcion->unoEstudiante($id);
+        //     echo json_encode($inscripciones);
+        // }else{
+        //     echo json_encode(array("message" => "Se requiere el ID de estudiante para obtener los datos"));
+        // }
+
+        if (isset($_GET["id"])) {
+            $id = intval($_GET["id"]);
+            $inscripciones = $inscripcion->unoEstudiante($id);
+    
+            echo json_encode($inscripciones);
+        } else {
+            echo json_encode(array("message" => "Se requiere el ID de estudiante para obtener los datos"));
+        }
+        
+    break;
+    
 }

@@ -63,7 +63,6 @@ switch($_GET["op"]){
     break;
 
 
-
     case "eliminar":
         if (isset($_POST["id_curso"])) {
             $id_curso = intval($_POST["id_curso"]);
@@ -77,6 +76,7 @@ switch($_GET["op"]){
             echo json_encode("Error: No se recibió el ID del curso");
         }
     break;
+    
 
     case "listarCursos":
         $cursos = array();

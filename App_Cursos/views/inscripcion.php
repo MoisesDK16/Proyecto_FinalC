@@ -52,6 +52,7 @@
                             <h5 class="modal-title" id="exampleModalLabel">Nueva Inscripcion</h5>
                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
+
                         <form id="frm_inscripciones">
                             <div class="modal-body">
                                 <input type="hidden" name="InscripcionesId" id="InscripcionesId">
@@ -122,9 +123,16 @@
 
             <!-- Lista de Inscripcion -->
             <div class='container-fluid pt-4 px-4'>
-                <button type="button" class="btn btn-primary " data-bs-toggle="modal" data-bs-target="#modalInscripcion">
-                    Nueva Inscripción
-                </button>
+                <div class="container d-flex flex-row justify-content-start">
+                    <div>
+                        <button type="button" class="btn btn-primary " data-bs-toggle="modal" data-bs-target="#modalInscripcion">
+                            Nueva Inscripción
+                        </button>
+                    </div>
+                    <div>
+                        <input onkeydown="if (event.keyCode === 13) buscarEstudianteInc(this.value)" style="width: 25rem;" type="text" id="buscarIncripcionEstudiante" class="form-control mb-4 mx-3" placeholder="Buscar Estudiante">
+                    </div>
+                </div>
                 <div class='d-flex align-items-center justify-content-between mb-4'>
                     <h6 class='mb-0'> Lista de Inscripciones</h6>
                     <table class="table table-bordered table-striped table-hover table-responsive">

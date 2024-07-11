@@ -7,15 +7,15 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
     <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
     <style>
-    .custom-flatpickr {
-        display: flex;
-        align-items: center;
-    }
+        .custom-flatpickr {
+            display: flex;
+            align-items: center;
+        }
 
-    .custom-flatpickr input {
-        margin-right: 5px;
-        flex: 1;
-    }
+        .custom-flatpickr input {
+            margin-right: 5px;
+            flex: 1;
+        }
     </style>
 
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
@@ -24,8 +24,7 @@
 <body>
     <div class='container-xxl position-relative bg-white d-flex p-0'>
         <!-- Spinner Start -->
-        <div id='spinner'
-            class='show bg-white position-fixed translate-middle w-100 vh-100 top-50 start-50 d-flex align-items-center justify-content-center'>
+        <div id='spinner' class='show bg-white position-fixed translate-middle w-100 vh-100 top-50 start-50 d-flex align-items-center justify-content-center'>
             <div class='spinner-border text-primary' style='width: 3rem; height: 3rem;' role='status'>
                 <span class='sr-only'>Cargando...</span>
             </div>
@@ -46,8 +45,7 @@
 
 
             <!-- Nuevo Profesor Modal -->
-            <div class="modal fade" id="modalProfesor" tabindex="-1" aria-labelledby="exampleModalLabel"
-                aria-hidden="true">
+            <div class="modal fade" id="modalProfesor" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                 <div class="modal-dialog">
                     <div class="modal-content">
                         <div class="modal-header">
@@ -60,7 +58,7 @@
                                 <div class="form-group">
                                     <label for="ProfesoresId">Indentificacion</label>
                                     <input type="text" name="ProfesoresId" id="ProfesoresId" placeholder="Inserte identificacion del Profesor" class="form-control" required>
-                                </div>    
+                                </div>
 
                                 <div class="form-group">
                                     <label for="Nombre">Nombre</label>
@@ -79,8 +77,7 @@
                             </div>
                             <div class="modal-footer">
                                 <button type="submit" class="btn btn-primary">Guardar</button>
-                                <button type="button" class="btn btn-secondary"
-                                    data-bs-dismiss="modal">Cancelar</button>
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
                             </div>
                         </form>
                     </div>
@@ -111,14 +108,13 @@
                                 <div class="form-group">
                                     <label for="Departamento">Departamento</label><br>
                                     <select style="width: 25rem;" name="EditarDepartamento" id="EditarDepartamento" class="form-control" required>
-                                        
+
                                     </select>
                                 </div>
                             </div>
                             <div class="modal-footer">
                                 <button type="submit" class="btn btn-primary">Actualizar</button>
-                                <button type="button" class="btn btn-secondary"
-                                    data-bs-dismiss="modal">Cancelar</button>
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
                             </div>
                         </form>
                     </div>
@@ -127,10 +123,17 @@
             <!-- Fin Editar Profesor Modal -->
 
             <!-- Lista de Profesor -->
-            <div class='container-fluid pt-4 px-4'>
-                <button type="button" class="btn btn-primary " data-bs-toggle="modal" data-bs-target="#modalProfesor">
-                    Nuevo Profesor
-                </button>
+            <div class='container-fluid pt-4 px-3'>
+                <div class="container d-flex flex-row justify-content-start">
+                    <div>
+                        <button type="button" class="btn btn-primary mb-4" data-bs-toggle="modal" data-bs-target="#modalProfesor">
+                            Nuevo Profesor
+                        </button>
+                    </div>
+                    <div>
+                        <input onkeydown="if (event.keyCode === 13) buscarProfesor(this.value)" style="width: 25rem;" type="text" id="buscarProfesor" class="form-control mb-4 mx-3" placeholder="Buscar Profesor">
+                    </div>
+                </div>
                 <div class='d-flex align-items-center justify-content-between mb-4'>
                     <h6 class='mb-0'> Lista de Profesores</h6>
                     <table class="table table-bordered table-striped table-hover table-responsive">

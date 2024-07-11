@@ -34,8 +34,8 @@ switch($_GET["op"]) {
     break;
 
 
-    case "insertar":
-
+    case "insertar":      
+       
         $nombre_curso = $_POST["Curso"];
         $id_profesor = $_POST["ID_Profesor"];
         $numero_aula = $_POST["Aula"];
@@ -51,12 +51,13 @@ switch($_GET["op"]) {
         // $datos = json_decode(file_get_contents("php://input"));
 
         // if (isset($datos->nombre_curso) && isset($datos->id_profesor) && isset($datos->numero_aula) && isset($datos->horario)) {
-        //     $clase = new Clase_Clase();
-        //     $respuesta = $clase->registrarClase($datos->nombre_curso, $datos->id_profesor, $datos->numero_aula, $datos->horario);
-        //     echo json_encode($respuesta);
+        // $clase = new Clase_Clase();
+        // $respuesta = $clase->registrarClase($datos->nombre_curso, $datos->id_profesor, $datos->numero_aula, $datos->horario);
+        // echo json_encode($respuesta);
         // } else {
-        //     echo json_encode(array("message" => "Todos los campos son obligatorios"));
+        // echo json_encode(array("message" => "Todos los campos son obligatorios"));
         // }
+
     break;
 
     case "actualizar":

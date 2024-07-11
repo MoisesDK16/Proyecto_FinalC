@@ -48,6 +48,40 @@ var cargaTabla = () => {
     });
 }
 
+var buscarProfesor = (id_profe) => {
+    $.get("../controllers/profesor.controller.php?op=uno&id=" + id_profe, (Profesor) => {
+        try{
+            var Profesor = JSON.parse(Profesor);
+
+            if(Profesor && Profesor.id_profesor){
+                console.log("Profesor encontrado:", Profesor);
+                var html = "";
+                html += `
+                    <tr>
+                        <td>${Profesor.id_profesor}</td>
+                        <td>${Profesor.nombre_profesor}</td>
+                        <td>${Profesor.apellido_profesor}</td>
+                        <td>${Profesor.nombre_departamento}</td>
+                        <td>
+                            <button class="btn btn-primary" onclick="cargarProfesor(${Profesor.id_profesor})">Editar</button>
+                            <button class="btn btn-danger" onclick="eliminar(${Profesor.id_profesor})">Eliminar</button>
+                        </td>
+                    </tr>
+                `;
+
+                $("#cuerpoprofesores").html(html);
+            }else{
+                console.error("Profesor no encontrado:", Profesor);
+                cargaTabla();
+            }
+
+        }catch(e){
+            console.error("Error parsing JSON:", e);
+        }
+        
+    });
+}
+
 
 
 var cargarProfesor = (id_profesor) =>{
@@ -63,6 +97,7 @@ var cargarProfesor = (id_profesor) =>{
         $("#modalEditarProfesor").modal("show");
     });
 }
+
 
 
 function cargarDepartamentos() {
