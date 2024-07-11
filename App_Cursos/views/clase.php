@@ -60,18 +60,21 @@
 
                                 <div class="form-group">
                                     <label for="Curso">Curso</label>
-                                    <input type="text" name="Curso" id="Curso" placeholder="Seleccione el Curso"
-                                        class="form-control" required>
+                                    <select name="Curso" id="Curso" class="form-control" required></select>
                                 </div>
+
                                 <div class="form-group">
-                                    <label for="Profesor">Profesor</label>
-                                    <input type="text" name="ID_Profesor" id="ID_Profesor"
-                                        placeholder="Seleccione el Profesor" class="form-control" required>
+                                    <label for="ID_Profesor">Profesor</label>
+                                    <select name="ID_Profesor" id="ID_Profesor" class="form-control" required>
+                                        
+                                    </select>
                                 </div>
+
                                 <div class="form-group">
                                     <label for="Aula">Aula</label>
-                                    <input type="text" name="Aula" id="Aula" placeholder="Seleccione el Aula"
-                                        class="form-control" required>
+                                    <select name="Aula" id="Aula" class="form-control" required>
+                                        
+                                    </select>                                
                                 </div>
                                 <div class="form-group">
                                     <label for="Horario">Horario</label>
@@ -104,20 +107,20 @@
                                 <input type="hidden" name="EditarClaseId" id="EditarClaseId">
 
                                 <div class="form-group">
-                                    <label for="Curso">Curso</label>
-                                    <input type="text" name="EditarClaseCurso" id="EditarClaseCurso" placeholder="Seleccione el Curso"
-                                        class="form-control" required>
+                                    <label for="EditarClaseCurso">Curso</label>
+                                    <select name="EditarClaseCurso" id="EditarClaseCurso" class="form-control" required></select>
                                 </div>
                                 <div class="form-group">
-                                    <label for="Profesor">Profesor</label>
-                                    <input type="text" name="EditarClaseProfesor" id="EditarClaseProfesor"
-                                        placeholder="Seleccione el Profesor" class="form-control" required>
+                                    <label for="EditarClaseProfesor">Profesor</label>
+                                    <select name="EditarClaseProfesor" id="EditarClaseProfesor" class="form-control" required></select>
+
                                 </div>
+
                                 <div class="form-group">
-                                    <label for="Aula">Aula</label>
-                                    <input type="text" name="EditarClaseAula" id="EditarClaseAula" placeholder="Seleccione el Aula"
-                                        class="form-control" required>
+                                    <label for="EditarClaseAula">Aula</label>
+                                    <select name="EditarClaseAula" id="EditarClaseAula" class="form-control" required></select>
                                 </div>
+
                                 <div class="form-group">
                                     <label for="Horario">Horario</label>
                                     <input type="text" name="EditarClaseHorario" id="EditarClaseHorario" placeholder="Seleccione el Horario"

@@ -56,10 +56,10 @@ switch($_GET["op"]) {
         $apellido_profesor = $_POST["Apellido"];
         $nombre_departamento = $_POST["Departamento"];
 
-        if(!empty($id_profesor) && !empty($nombre_profesor) && !empty($apellido_profesor) && !empty($nombre_departamento)){
+        if (!empty($id_profesor) && !empty($nombre_profesor) && !empty($apellido_profesor) && !empty($nombre_departamento)) {
             $respuesta = $profesor->registrarProfesor($id_profesor, $nombre_profesor, $apellido_profesor, $nombre_departamento);
             echo json_encode($respuesta);
-        }else{
+        } else {
             echo json_encode(['message' => 'Todos los campos son obligatorios']);
         }
 
@@ -110,6 +110,30 @@ switch($_GET["op"]) {
         } else {
             echo json_encode(array("message" => "El ID del profesor es obligatorio"));
         }
+    break;
+
+    case "listarDepartamentos":
+
+        $listaDepartamentos = array();
+        $dato = $profesor->listarDepartamentos();
+
+        while($fila = mysqli_fetch_assoc($dato)) {
+            $listaDepartamentos[] = $fila;
+        }
+
+        echo json_encode($listaDepartamentos);
+
+    break;
+
+    case "listarComboProfesores":
+        $listaProfesores = array();
+        $dato = $profesor->listarComboProfesores();
+
+        while($fila = mysqli_fetch_assoc($dato)){
+            $listaProfesores[] = $fila;
+        }
+        echo json_encode($listaProfesores);
+    
     break;
 
 }
