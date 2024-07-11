@@ -5,6 +5,7 @@
     <?php require_once('./html/head.php') ?>
     <link href='../public/lib/calendar/lib/main.css' rel='stylesheet' />
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
     <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
     <style>
         .custom-flatpickr {
@@ -109,7 +110,7 @@
             <!-- Lista de Aula -->
             <div class='container-fluid pt-4 px-4'>
                 <button type="button" class="btn btn-primary " data-bs-toggle="modal" data-bs-target="#modalAula">
-                    Nueva Aula
+                <i class="bi bi-house-add"></i> Nueva Aula
                 </button>
                 <h6 style="text-align: center;" class='mb-3 mt-4'> Lista de Aulas</h6>
                 <div class='d-flex align-items-center justify-content-between mb-4'>

@@ -14,7 +14,7 @@
 
 <!-- Icon Font Stylesheet -->
 <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
-<link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" rel="stylesheet">CRUD Danny Toro
+<link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" rel="stylesheet">GRUPO 3
 
 <!-- Libraries Stylesheet -->
 <link href="../public/lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">

@@ -5,6 +5,7 @@
     <?php require_once('./html/head.php') ?>
     <link href='../public/lib/calendar/lib/main.css' rel='stylesheet' />
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
     <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
     <style>
         .custom-flatpickr {
@@ -127,7 +128,7 @@
                 <div class="container d-flex flex-row justify-content-start">
                     <div>
                         <button type="button" class="btn btn-primary mb-4" data-bs-toggle="modal" data-bs-target="#modalProfesor">
-                            Nuevo Profesor
+                        <i class="bi bi-person-check"></i> Nuevo Profesor
                         </button>
                     </div>
                     <div>
