@@ -11,6 +11,9 @@ function init() {
 
 $(document).ready(() => {
     cargaTabla();
+    cargarCursos();
+    cargarProfesores();
+    cargarAulas();
 });
 
 // Cargar la tabla de clases
@@ -65,6 +68,43 @@ var cargarClase = (id_clase) => {
         $("#modalEditarClase").modal("show");
     });
 }
+
+function cargarCursos() {
+    $.get("../controllers/curso.controller.php?op=listarCursos", (response) => {
+        let listaCursos = JSON.parse(response);
+        let html = "<option value=''>Seleccione un Curso</option>";
+        $.each(listaCursos, (index, curso) => {
+            html += `<option value='${curso.nombre_curso}'>${curso.nombre_curso}</option>`;
+        });
+        $("#Curso").html(html);
+        $("#EditarClaseCurso").html(html);
+    });
+}
+
+function cargarProfesores(){
+    $.get("../controllers/profesor.controller.php?op=listarComboProfesores", (response) => {
+        let listaProfesores = JSON.parse(response);
+        let html = "<option value=''>Seleccione un Profesor</option>";
+        $.each(listaProfesores, (index, profesor) => {
+            html += `<option value='${profesor.id_profesor}'>${profesor.id_profesor} - ${profesor.nombre_profesor} ${profesor.apellido_profesor}</option>`;
+        });
+        $("#ID_Profesor").html(html);
+        $("#EditarClaseProfesor").html(html);
+    });
+}
+
+function cargarAulas(){
+    $.get("../controllers/aula.controller.php?op=listarComboAulas", (response) => {
+        let listaAulas = JSON.parse(response);
+        let html = "<option value=''>Seleccione un Aula</option>";
+        $.each(listaAulas, (index, aula) => {
+            html += `<option value='${aula.numero_aula}'>${aula.numero_aula}</option>`;
+        });
+        $("#Aula").html(html);
+        $("#EditarClaseAula").html(html);
+    });
+}
+
 
 var guardar = (e) => {
     

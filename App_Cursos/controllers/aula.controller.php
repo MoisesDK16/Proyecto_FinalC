@@ -89,8 +89,20 @@ switch ($_GET["op"]) {
         }
         break;
 
+    case "listarComboAulas":
+
+        $aulas = array();
+        $dato = $aula->listarComboAulas();
+
+        while ($row = mysqli_fetch_assoc($dato)) {
+            $aulas[] = $row;
+        }
+        echo json_encode($aulas);
+
+    break;
+
     default:
         echo json_encode(array("message" => "Operación no válida"));
-        break;
+    break;
 }
 ?>

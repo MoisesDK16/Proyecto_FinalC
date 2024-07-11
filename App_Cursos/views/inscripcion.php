@@ -62,12 +62,9 @@
                                 </div>
                                 <div class="form-group">
                                     <label for="Curso">Curso</label>
-                                    <input type="text" name="Curso" id="Curso" placeholder="Seleccione el Curso del Estudiante" class="form-control" required>
+                                    <select name="Curso" id="Curso" class="form-control" required></select>
                                 </div>
-                                <div class="form-group">
-                                    <label for="FechaInscripcion">Fecha Inscripcion</label>
-                                    <input type="text" name="FechaInscripcion" id="FechaInscripcion" placeholder="Escriba la fecha de inscripcion" class="form-control" required>
-                                </div>
+
                             </div>
                             <div class="modal-footer">
                                 <button type="submit" class="btn btn-primary">Guardar</button>
@@ -108,13 +105,9 @@
 
                                 <div class="form-group">
                                     <label for="Curso">Curso</label>
-                                    <input type="text" name="EditarCurso" id="EditarCurso" placeholder="Seleccione el Curso del Estudiante" class="form-control" required>
+                                    <select name="EditarCurso" id="EditarCurso" class="form-control" required></select>
                                 </div>
 
-                                <div class="form-group">
-                                    <label for="FechaInscripcion">Fecha Inscripción</label>
-                                    <input type="text" name="EditarFechaInscripcion" id="EditarFechaInscripcion" placeholder="Escriba la fecha de inscripción" class="form-control" required>
-                                </div>
                             </div>
                             <div class="modal-footer">
                                 <button type="submit" class="btn btn-primary">Actualizar</button>

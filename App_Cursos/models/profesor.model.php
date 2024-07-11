@@ -102,4 +102,20 @@ class Clase_Profesor{
         return $result;
     }
 
+    public function listarDepartamentos() {
+        $conectar = new Clase_Conectar();
+        $con = $conectar->conectar();
+        $sql = "SELECT * FROM departamentos";
+        $result = $con->query($sql);
+        return $result;
+    }
+
+    public function listarComboProfesores(){
+        $conectar = new Clase_Conectar();
+        $con = $conectar->conectar();
+        $sql = "SELECT pro.id_profesor, pro.nombre_profesor, pro.apellido_profesor FROM profesores pro";
+        $result = $con->query($sql);
+        return $result;
+    }
+
 }

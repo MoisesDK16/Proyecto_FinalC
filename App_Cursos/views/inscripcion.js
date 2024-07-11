@@ -11,6 +11,7 @@ function init() {
 
 $(document).ready(() => {
     cargaTabla();
+    cargarCursos();
 });
 
 // Cargar la tabla de estudiantes
@@ -70,6 +71,19 @@ var cargarInscripcion = (id) => {
             text: "Ocurrió un error al intentar obtener los datos de la inscripción",
             icon: "error",
         });
+    });
+}
+
+
+function cargarCursos() {
+    $.get("../controllers/curso.controller.php?op=listarCursos", (response) => {
+        let listaCursos = JSON.parse(response);
+        let html = "<option value=''>Seleccione un Curso</option>";
+        $.each(listaCursos, (index, curso) => {
+            html += `<option value='${curso.nombre_curso}'>${curso.nombre_curso}</option>`;
+        });
+        $("#Curso").html(html);
+        $("#EditarCurso").html(html);
     });
 }
 

@@ -59,7 +59,15 @@ class Clase_Aula{
         $stmt->bind_param("i", $id_aula);
         $stmt->execute();
         $con->close();
-    }   
+    }
+    
+    public function listarComboAulas(){
+        $conexion = new Clase_Conectar();
+        $con = $conexion->conectar();
+        $sql = "SELECT numero_aula FROM aulas";
+        $result = $con->query($sql);
+        return $result;
+    }
 }
 
 

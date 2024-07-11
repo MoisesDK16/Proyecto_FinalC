@@ -77,6 +77,17 @@ switch($_GET["op"]){
             echo json_encode("Error: No se recibió el ID del curso");
         }
     break;
+
+    case "listarCursos":
+        $cursos = array();
+        $datos = $curso->listarCursos();
+
+        while ($row = mysqli_fetch_assoc($datos)) {
+            $cursos[] = $row;
+        }
+        echo json_encode($cursos);
+
+    break;
     
     default:
         echo json_encode(array("message" => "Operación no válida"));

@@ -86,5 +86,20 @@ class Curso_Clase {
         $con->close();
         return $resultado;
     }
+
+    public function listarCursos(){
+        $conexion = new Clase_Conectar();
+        $con = $conexion->conectar();
+        $sql = "SELECT c.nombre_curso FROM cursos c";
+        $datos = mysqli_query($con, $sql);
+
+        if ($datos === false) {
+            return "Error al listar";
+        }
+
+        $con->close();
+        return $datos;
+    }
+    
     
 }

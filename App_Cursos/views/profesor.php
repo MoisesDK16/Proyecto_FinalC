@@ -71,8 +71,10 @@
                                     <input type="text" name="Apellido" id="Apellido" placeholder="Inserte el Apellido del Profesor" class="form-control" required>
                                 </div>
                                 <div class="form-group">
-                                    <label for="Departamento">Departamento</label>
-                                    <input type="text" name="Departamento" id="Departamento" placeholder="Seleccione el Departamento del Profesor" class="form-control" required>
+                                    <label for="Departamento">Departamento</label><br>
+                                    <select style="width: 25rem;" name="Departamento" id="Departamento" class="form-control" required>
+
+                                    </select>
                                 </div>
                             </div>
                             <div class="modal-footer">
@@ -107,8 +109,10 @@
                                     <input type="text" name="EditarApellido" id="EditarApellido" placeholder="Seleccione el Departamento del Profesor" class="form-control" required>
                                 </div>
                                 <div class="form-group">
-                                    <label for="Departamento">Departamento</label>
-                                    <input type="text" name="EditarDepartamento" id="EditarDepartamento" placeholder="Seleccione el Departamento del Profesor" class="form-control" required>
+                                    <label for="Departamento">Departamento</label><br>
+                                    <select style="width: 25rem;" name="EditarDepartamento" id="EditarDepartamento" class="form-control" required>
+                                        
+                                    </select>
                                 </div>
                             </div>
                             <div class="modal-footer">

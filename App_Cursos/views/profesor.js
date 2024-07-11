@@ -10,6 +10,7 @@ function init() {
 
 $(document).ready(() => {
     cargaTabla();
+    cargarDepartamentos();
 });
 
 // Cargar la tabla de profesores
@@ -63,9 +64,22 @@ var cargarProfesor = (id_profesor) =>{
     });
 }
 
+
+function cargarDepartamentos() {
+    $.get("../controllers/profesor.controller.php?op=listarDepartamentos", (response) => {
+        let listaDepartamentos = JSON.parse(response);
+        let html = "<option value=''>Seleccione un departamento</option>";
+        $.each(listaDepartamentos, (index, unDepartamento) => {
+            html += `<option value='${unDepartamento.nombre_departamento}'>${unDepartamento.nombre_departamento}</option>`;
+        });
+        $("#Departamento").html(html);
+        $("#EditarDepartamento").html(html);
+    });
+}
+
 var guardarProfesor = (e) => {
     e.preventDefault();
-    var frm_profesores= new FormData($("#frm_profesores")[0]);
+    var frm_profesores = new FormData($("#frm_profesores")[0]);
     var ruta = "../controllers/profesor.controller.php?op=insertar";
 
     $.ajax({
@@ -83,9 +97,7 @@ var guardarProfesor = (e) => {
             console.error("Error al guardar:", error);
         }
     });
-
 }
-
 
 var editar = (e) => {
     e.preventDefault();
