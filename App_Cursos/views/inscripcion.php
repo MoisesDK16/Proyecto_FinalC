@@ -54,11 +54,11 @@
                         </div>
                         <form id="frm_inscripciones">
                             <div class="modal-body">
-                                <!-- <input type="hidden" name="InscripcionesId" id="InscripcionesId"> -->
+                                <input type="hidden" name="InscripcionesId" id="InscripcionesId">
 
                                 <div class="form-group">
                                     <label for="Estudiante">Estudiante</label>
-                                    <input type="text" name="Estudiante" id="Estudiante" placeholder="Seleccione el Nombre del Estudiante" class="form-control" required>
+                                    <input type="text" name="Estudiante" id="Estudiante" placeholder="Indique la identidicación del Estudiante" class="form-control" required>
                                 </div>
                                 <div class="form-group">
                                     <label for="Curso">Curso</label>

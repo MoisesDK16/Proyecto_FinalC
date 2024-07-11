@@ -101,12 +101,15 @@ switch($_GET["op"]) {
 
 
     case "eliminar":
-        $datos = json_decode(file_get_contents("php://input"));
+        $id_profesor = $_POST["id_profesor"] ?? null;
 
-        if (isset($datos->id_profesor)) {
-            $profesor = new Clase_Profesor();
-            $respuesta = $profesor->eliminarProfesor($datos->id_profesor);
-            echo json_encode($respuesta);
+        if (!empty($id_profesor)) {
+            $eliminado = $profesor->eliminarProfesor($id_profesor);
+            if ($eliminado) {
+                echo json_encode("Profesor eliminado");
+            } else {
+                echo json_encode("Error al eliminar profesor");
+            }
         } else {
             echo json_encode(array("message" => "El ID del profesor es obligatorio"));
         }

@@ -86,12 +86,15 @@ switch($_GET["op"]) {
     break;
 
     case "eliminar":
-        $datos = json_decode(file_get_contents("php://input"));
+        $id_clase = $_POST["id_clase"] ?? null;
 
-        if(isset($datos->id_clase)) {
-            $clase = new Clase_Clase();
-            $respuesta = $clase->eliminarClase($datos->id_clase);
-            echo json_encode($respuesta);
+        if (!empty($id_clase)) {
+            $eliminado = $clase->eliminarClase($id_clase);
+            if ($eliminado) {
+                echo json_encode("Clase eliminado");
+            } else {
+                echo json_encode("Error al eliminar clase");
+            }
         } else {
             echo json_encode(array("message" => "El ID de la clase es obligatorio"));
         }

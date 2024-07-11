@@ -129,7 +129,7 @@ var eliminar = (DepartamentoId) => {
                     } catch (e) {
                         Swal.fire({
                             title: "Departamentos",
-                            text: "No se pudo eliminar el departamento debido a que ya está registrado en otra tabla",
+                            text: "No se pudo eliminar el departamento debido a que ya está en uso en PROFESORES",
                             icon: "error",
                         });
                         console.error("Error al parsear JSON:", e);

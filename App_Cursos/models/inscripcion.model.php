@@ -24,6 +24,24 @@ class Clase_Inscripcion{
         $conexion = new Clase_Conectar();
         $con = $conexion->conectar();
     
+        // Verificar si ya existe una inscripción para este estudiante en este curso
+        $sql_check = "SELECT * FROM inscripciones 
+                      WHERE id_estudiante = (SELECT e.id_estudiante FROM estudiantes e WHERE e.id_estudiante = ?) 
+                      AND id_curso = (SELECT c.id_curso FROM cursos c WHERE c.nombre_curso = ?)";
+        $stmt_check = $con->prepare($sql_check);
+        $stmt_check->bind_param("ss", $id_estudiante, $nombre_curso);
+        $stmt_check->execute();
+        $stmt_check->store_result();
+    
+        if ($stmt_check->num_rows > 0) {
+            $stmt_check->close();
+            $con->close();
+            return array("message" => "El estudiante ya está inscrito en este curso.");
+        }
+    
+        $stmt_check->close();
+    
+        // Proceder a insertar la inscripción
         $sql = "INSERT INTO inscripciones (id_estudiante, id_curso, fecha_inscripcion) 
                 VALUES (
                     (SELECT e.id_estudiante FROM estudiantes e WHERE e.id_estudiante = ?), 
@@ -31,28 +49,22 @@ class Clase_Inscripcion{
                     CURRENT_DATE
                 )";
     
-        // Preparar la declaración
         $stmt = $con->prepare($sql);
-    
-        // Vincular los parámetros
         $stmt->bind_param("ss", $id_estudiante, $nombre_curso);
-    
-        // Ejecutar la declaración
         $resultado = $stmt->execute();
     
-        // Verificar si la inserción fue exitosa
         if ($resultado) {
             $respuesta = array("message" => "Inscripción registrada correctamente");
         } else {
             $respuesta = array("message" => "Error al registrar la inscripción: " . $stmt->error);
         }
     
-        // Cerrar la declaración y la conexión
         $stmt->close();
         $con->close();
     
         return $respuesta;
     }
+    
     
 
     public function actualizarInscripcion($id_inscripcion, $id_estudiante, $nombre_curso) {
@@ -68,32 +80,47 @@ class Clase_Inscripcion{
         $stmt->close();
     
         if ($id_curso) {
+            // Verificar si ya existe una inscripción diferente con los mismos estudiante y curso
+            $sql_check = "SELECT * FROM inscripciones 
+                          WHERE id_estudiante = ? AND id_curso = ? AND id_inscripcion != ?";
+            $stmt_check = $con->prepare($sql_check);
+            $stmt_check->bind_param("iii", $id_estudiante, $id_curso, $id_inscripcion);
+            $stmt_check->execute();
+            $stmt_check->store_result();
+    
+            if ($stmt_check->num_rows > 0) {
+                $stmt_check->close();
+                $con->close();
+                return array("status" => "error", "message" => "El estudiante ya se encuentra inscrito en ese curso.");
+            }
+    
+            $stmt_check->close();
+    
             // Actualizar la inscripción con los nuevos valores
             $sql = "UPDATE inscripciones 
                     SET id_estudiante = (SELECT e.id_estudiante FROM estudiantes e WHERE e.id_estudiante = ?), 
                         id_curso = ?, 
                         fecha_inscripcion = CURRENT_DATE 
                     WHERE id_inscripcion = ?";
-
+    
             $stmt = $con->prepare($sql);
             $stmt->bind_param("sii", $id_estudiante, $id_curso, $id_inscripcion);
     
             if ($stmt->execute()) {
-                $respuesta = array("message" => "Inscripción actualizada correctamente");
+                $respuesta = array("status" => "success", "message" => "Inscripción actualizada correctamente");
             } else {
-                $respuesta = array("message" => "Error al actualizar la inscripción: " . $stmt->error);
+                $respuesta = array("status" => "error", "message" => "Error al actualizar la inscripción: " . $stmt->error);
             }
     
             $stmt->close();
         } else {
-            $respuesta = array("message" => "Error: Curso no encontrado");
+            $respuesta = array("status" => "error", "message" => "Error: Curso no encontrado");
         }
     
         $con->close();
     
         return $respuesta;
-    }    
-    
+    }
 
     public function eliminarInscripcion($id_inscripcion) {
         $conexion = new Clase_Conectar();

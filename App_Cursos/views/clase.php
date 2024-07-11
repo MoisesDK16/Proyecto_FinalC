@@ -56,7 +56,7 @@
                         </div>
                         <form id="frm_clases">
                             <div class="modal-body">
-                                <!-- <input type="hidden" name="ClasesId" id="ClasesId"> -->
+                                <input type="hidden" name="ClasesId" id="ClasesId">
 
                                 <div class="form-group">
                                     <label for="Curso">Curso</label>

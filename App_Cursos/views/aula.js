@@ -139,7 +139,7 @@ var eliminar = (AulasId) => {
                     } catch (e) {
                         Swal.fire({
                             title: "Aulas",
-                            text: "No se pudo eliminar el aula debido a que ya está registrado en otra tabla",
+                            text: "No se pudo eliminar el aula debido a que ya está en uso en CLASES",
                             icon: "error",
                         });
                         console.error("Error al parsear JSON:", e);

@@ -156,5 +156,53 @@ var editar = (e) => {
     });
 };
 
+// Eliminar una Clase
+var eliminar = (ClasesId) => {
+    Swal.fire({
+        title: "Clase",
+        text: "¿Está seguro que desea eliminar la Clase?",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#d33",
+        cancelButtonColor: "#3085d6",
+        confirmButtonText: "Eliminar",
+    }).then((result) => {
+        if (result.isConfirmed) {
+            $.ajax({
+                url: "../controllers/clase.controller.php?op=eliminar",
+                type: "POST",
+                data: { id_clase: ClasesId },
+                success: (resultado) => {
+                    console.log("Respuesta del servidor:", resultado);
+                    try {
+                        let response = JSON.parse(resultado);
+                        if (response === "Clase eliminado") {
+                            Swal.fire({
+                                title: "Clase",
+                                text: "Se eliminó con éxito",
+                                icon: "success",
+                            });
+                            cargaTabla();
+                        }
+                    } catch (e) {
+                        Swal.fire({
+                            title: "Clase",
+                            text: "No se pudo eliminar la clase debido a que ya está registrado en otra tabla",
+                            icon: "error",
+                        });
+                        console.error("Error al parsear JSON:", e);
+                    }
+                },
+                error: () => {
+                    Swal.fire({
+                        title: "Clase", 
+                        text: "Ocurrió un error al intentar eliminar",
+                        icon: "error",
+                    });
+                }
+            });
+        }
+    });
+};
 
 init();

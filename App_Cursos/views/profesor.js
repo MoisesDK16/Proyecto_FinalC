@@ -121,4 +121,54 @@ var editar = (e) => {
         }
     });
 };
+
+// Eliminar un estudiante
+var eliminar = (ProfesoresId) => {
+    Swal.fire({
+        title: "Profesores",
+        text: "¿Está seguro que desea eliminar el profesor?",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#d33",
+        cancelButtonColor: "#3085d6",
+        confirmButtonText: "Eliminar",
+    }).then((result) => {
+        if (result.isConfirmed) {
+            $.ajax({
+                url: "../controllers/profesor.controller.php?op=eliminar",
+                type: "POST",
+                data: { id_profesor: ProfesoresId },
+                success: (resultado) => {
+                    console.log("Respuesta del servidor:", resultado);
+                    try {
+                        let response = JSON.parse(resultado);
+                        if (response === "Profesor eliminado") {
+                            Swal.fire({
+                                title: "Profesores",
+                                text: "Se eliminó con éxito",
+                                icon: "success",
+                            });
+                            cargaTabla();
+                        }
+                    } catch (e) {
+                        Swal.fire({
+                            title: "Profesores",
+                            text: "No se pudo eliminar al profesor debido a que ya se encuentra registrado en una CLASE",
+                            icon: "error",
+                        });
+                        console.error("Error al parsear JSON:", e);
+                    }
+                },
+                error: () => {
+                    Swal.fire({
+                        title: "Profesores", 
+                        text: "Ocurrió un error al intentar eliminar",
+                        icon: "error",
+                    });
+                }
+            });
+        }
+    });
+};
+
 init();

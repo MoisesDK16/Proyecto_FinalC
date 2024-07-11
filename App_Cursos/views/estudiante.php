@@ -130,6 +130,7 @@
                         <thead class="table-light">
                             <tr>
                                 <th>#</th>
+                                <th>Identificación</th>
                                 <th>Nombre</th>
                                 <th>Apellido</th>
                                 <th>Fecha Nacimiento</th>

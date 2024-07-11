@@ -30,6 +30,7 @@ var cargaTabla = () => {
                 html += `
                     <tr>
                         <td>${indice + 1}</td>
+                        <td>${unEstudiante.id_estudiante}</td>
                         <td>${unEstudiante.nombre}</td>
                         <td>${unEstudiante.apellido}</td>
                         <td>${unEstudiante.fecha_nacimiento}</td>
@@ -147,7 +148,7 @@ var eliminar = (EstudiantesId) => {
                     } catch (e) {
                         Swal.fire({
                             title: "Estudiantes",
-                            text: "No se pudo eliminar el estudiante debido a que ya está registrado en otra tabla",
+                            text: "No se pudo eliminar el estudiante debido a que ya está siendo utilizado en INSCRIPCION",
                             icon: "error",
                         });
                         console.error("Error al parsear JSON:", e);

@@ -14,7 +14,7 @@ $(document).ready(() => {
     cargarCursos();
 });
 
-// Cargar la tabla de estudiantes
+// Cargar la tabla de inscripcion
 var cargaTabla = () => {
     var html = "";
 
@@ -87,7 +87,6 @@ function cargarCursos() {
     });
 }
 
-
 var guardarInscripcion = (e) =>{
     e.preventDefault();
     var frm_inscripciones = new FormData($("#frm_inscripciones")[0]);
@@ -130,6 +129,55 @@ var editar = (e) => {
         },
         error: function (xhr, status, error) {
             console.error("Error al actualizar:", error);
+        }
+    });
+};
+
+// Eliminar una inscripción
+var eliminar = (InscripcionesId) => {
+    Swal.fire({
+        title: "Inscripción",
+        text: "¿Está seguro que desea eliminar el inscripcion?",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#d33",
+        cancelButtonColor: "#3085d6",
+        confirmButtonText: "Eliminar",
+    }).then((result) => {
+        if (result.isConfirmed) {
+            $.ajax({
+                url: "../controllers/inscripcion.controller.php?op=eliminar",
+                type: "POST",
+                data: { id_inscripcion: InscripcionesId },
+                success: (resultado) => {
+                    console.log("Respuesta del servidor:", resultado);
+                    try {
+                        let response = JSON.parse(resultado);
+                        if (response === "Inscripcion eliminado") {
+                            Swal.fire({
+                                title: "Inscripción",
+                                text: "Se eliminó con éxito",
+                                icon: "success",
+                            });
+                            cargaTabla();
+                        }
+                    } catch (e) {
+                        Swal.fire({
+                            title: "Inscripción",
+                            text: "No se pudo eliminar la inscripcion debido a que ya está registrado en otra tabla",
+                            icon: "error",
+                        });
+                        console.error("Error al parsear JSON:", e);
+                    }
+                },
+                error: () => {
+                    Swal.fire({
+                        title: "Inscripción", 
+                        text: "Ocurrió un error al intentar eliminar",
+                        icon: "error",
+                    });
+                }
+            });
         }
     });
 };
