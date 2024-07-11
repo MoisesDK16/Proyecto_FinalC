@@ -24,7 +24,6 @@ class Clase_Inscripcion{
         $conexion = new Clase_Conectar();
         $con = $conexion->conectar();
     
-        // Verificar si ya existe una inscripción para este estudiante en este curso
         $sql_check = "SELECT * FROM inscripciones 
                       WHERE id_estudiante = (SELECT e.id_estudiante FROM estudiantes e WHERE e.id_estudiante = ?) 
                       AND id_curso = (SELECT c.id_curso FROM cursos c WHERE c.nombre_curso = ?)";
@@ -41,7 +40,6 @@ class Clase_Inscripcion{
     
         $stmt_check->close();
     
-        // Proceder a insertar la inscripción
         $sql = "INSERT INTO inscripciones (id_estudiante, id_curso, fecha_inscripcion) 
                 VALUES (
                     (SELECT e.id_estudiante FROM estudiantes e WHERE e.id_estudiante = ?), 
@@ -71,7 +69,6 @@ class Clase_Inscripcion{
         $conexion = new Clase_Conectar();
         $con = $conexion->conectar();
     
-        // Obtener el ID del curso basado en el nombre proporcionado
         $stmt = $con->prepare("SELECT id_curso FROM cursos WHERE nombre_curso = ?");
         $stmt->bind_param("s", $nombre_curso);
         $stmt->execute();
@@ -80,7 +77,6 @@ class Clase_Inscripcion{
         $stmt->close();
     
         if ($id_curso) {
-            // Verificar si ya existe una inscripción diferente con los mismos estudiante y curso
             $sql_check = "SELECT * FROM inscripciones 
                           WHERE id_estudiante = ? AND id_curso = ? AND id_inscripcion != ?";
             $stmt_check = $con->prepare($sql_check);
@@ -96,7 +92,6 @@ class Clase_Inscripcion{
     
             $stmt_check->close();
     
-            // Actualizar la inscripción con los nuevos valores
             $sql = "UPDATE inscripciones 
                     SET id_estudiante = (SELECT e.id_estudiante FROM estudiantes e WHERE e.id_estudiante = ?), 
                         id_curso = ?, 
