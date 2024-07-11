@@ -12,14 +12,16 @@ $(document).ready(() => {
     cargaTabla();
 });
 
+
+
+
 // Cargar la tabla de estudiantes
 var cargaTabla = () => {
     var html = "";
 
     $.get("../controllers/estudiante.controller.php?op=listar", (response) => {
-        let listaEstudiantes;
         try {
-            listaEstudiantes = JSON.parse(response);
+            var listaEstudiantes = JSON.parse(response);
         } catch (e) {
             console.error("Error parsing JSON:", e);
             return;
@@ -30,6 +32,7 @@ var cargaTabla = () => {
                 html += `
                     <tr>
                         <td>${indice + 1}</td>
+                        <td>${unEstudiante.id_estudiante}</td>  
                         <td>${unEstudiante.nombre}</td>
                         <td>${unEstudiante.apellido}</td>
                         <td>${unEstudiante.fecha_nacimiento}</td>
@@ -47,7 +50,7 @@ var cargaTabla = () => {
     });
 };
 
-// Cargar los datos de un estudiante en el formulario de edición
+
 var cargarEstudiante = (id_estudiante) => {
     console.log("ID del estudiante:", id_estudiante);
     $.get("../controllers/estudiante.controller.php?op=uno&id=" + id_estudiante, (data) => {
@@ -66,6 +69,41 @@ var cargarEstudiante = (id_estudiante) => {
         });
     });
 };
+
+var buscarEstudiante = (id_estudiante) => {
+    $.get("../controllers/estudiante.controller.php?op=uno&id=" + id_estudiante, (data) => {
+        try {
+            var Estudiante = JSON.parse(data);
+
+            if (Estudiante && Estudiante.id_estudiante) {
+                console.log("Estudiante encontrado:", Estudiante);
+
+                var html="";
+
+                html += `
+                    <tr>
+                        <td>${Estudiante.id_estudiante}</td>
+                        <td>${Estudiante.nombre}</td>
+                        <td>${Estudiante.apellido}</td>
+                        <td>${Estudiante.fecha_nacimiento}</td>
+                        <td>
+                            <button class="btn btn-primary" onclick="cargarEstudiante(${Estudiante.id_estudiante})">Editar</button>
+                            <button class="btn btn-danger" onclick="eliminar(${Estudiante.id_estudiante})">Eliminar</button>
+                        </td>
+                    </tr>
+                `;
+
+                $("#cuerpoestudiantes").html(html);
+            } else {
+                console.error("Estudiante no encontrado:", Estudiante);
+                cargaTabla();
+            }
+        } catch (e) {
+            console.error("Error parsing JSON:", e);
+        }
+    });
+}
+
 
 // Guardar o editar un estudiante
 var guardar = (e) => {

@@ -14,6 +14,7 @@ $(document).ready(() => {
     cargarCursos();
     cargarProfesores();
     cargarAulas();
+    cargarHorarios();
 });
 
 // Cargar la tabla de clases
@@ -103,6 +104,22 @@ function cargarAulas(){
         $("#Aula").html(html);
         $("#EditarClaseAula").html(html);
     });
+}
+
+function cargarHorarios(){
+    let horarios = ["7:00 - 8:30",
+         "8:45 - 10:15", 
+         "10:30 - 12:00", 
+         "12:15 - 13:45", 
+         "14:00 - 15:30"];
+    
+    let html = "<option value=''>Seleccione un Horario</option>";
+    $.each(horarios, (index, horario) => {
+        html += `<option value='${horario}'>${horario}</option>`;
+    });
+
+    $("#Horario").html(html);
+    $("#EditarClaseHorario").html(html);
 }
 
 

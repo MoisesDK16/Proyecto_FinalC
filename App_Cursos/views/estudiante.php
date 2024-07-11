@@ -71,7 +71,7 @@
                                 </div>
                                 <div class="form-group">
                                     <label for="FechaNacimiento">Fecha Nacimiento</label>
-                                    <input type="text" name="FechaNacimiento" id="FechaNacimiento" placeholder="Ingrese la fecha de nacimiento del estudiante" class="form-control" required>
+                                    <input type="date" name="FechaNacimiento" id="FechaNacimiento" placeholder="Ingrese la fecha de nacimiento del estudiante" class="form-control" required>
                                 </div>
                             </div>
                             <div class="modal-footer">
@@ -106,7 +106,7 @@
                                 </div>
                                 <div class="form-group">
                                     <label for="FechaNacimientoE">Fecha Nacimiento</label>
-                                    <input type="text" name="FechaNacimientoE" id="FechaNacimientoE" placeholder="Ingrese la fecha de nacimiento del estudiante" class="form-control" required>
+                                    <input type="date" name="FechaNacimientoE" id="FechaNacimientoE" placeholder="Ingrese la fecha de nacimiento del estudiante" class="form-control" required>
                                 </div>
                             </div>
                             <div class="modal-footer">
@@ -120,16 +120,25 @@
             <!-- Fin Editar Estudiante Modal -->
 
             <!-- Lista de Productos -->
-            <div class='container-fluid pt-4 px-4'>
-                <button type="button" class="btn btn-primary " data-bs-toggle="modal" data-bs-target="#modalEstudiante">
-                    Nuevo Estudiante
-                </button>
+            <div class='container-fluid pt-4 px-3'>
+                <div class="container d-flex flex-row justify-content-start">
+                    <div>
+                        <button type="button" class="btn btn-primary mb-4 mx-2" data-bs-toggle="modal" data-bs-target="#modalEstudiante">
+                            Nuevo Estudiante
+                        </button>
+                    </div>
+                    <div>
+                        <input onkeydown="if (event.keyCode === 13) buscarEstudiante(this.value)" style="width: 25rem;" type="text" id="buscarEstudiante" class="form-control mb-4 mx-3" placeholder="Buscar Estudiante">
+                    </div>
+                </div>
+
+                <h6 style="text-align: center;" class='mb-4'> Lista de Estudiantes</h6>
                 <div class='d-flex align-items-center justify-content-between mb-4'>
-                    <h6 class='mb-0'> Lista de Estudiantes</h6>
                     <table class="table table-bordered table-striped table-hover table-responsive">
                         <thead class="table-light">
                             <tr>
                                 <th>#</th>
+                                <th>Identificacion</th>
                                 <th>Nombre</th>
                                 <th>Apellido</th>
                                 <th>Fecha Nacimiento</th>

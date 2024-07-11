@@ -137,6 +137,38 @@ class Clase_Inscripcion{
         $stmt->close();
         $con->close();
         return $fila;
-    }    
+    } 
+    
+    
+    public function unoEstudiante($id_Estudiante) {
+        $conexion = new Clase_Conectar();
+        $con = $conexion->conectar();
+    
+        $sql = "SELECT inc.id_inscripcion, e.id_estudiante, e.nombre, e.apellido, cur.nombre_curso, inc.fecha_inscripcion 
+                FROM inscripciones as inc
+                INNER JOIN estudiantes as e ON e.id_estudiante = inc.id_estudiante
+                INNER JOIN cursos as cur ON cur.id_curso = inc.id_curso
+                WHERE inc.id_estudiante = ?;";
+    
+        $stmt = $con->prepare($sql);
+        if (!$stmt) {
+            die("Error en la preparación de la consulta: " . $con->error);
+        }
+    
+        $stmt->bind_param("s", $id_Estudiante);
+        $stmt->execute();
+        $resultado = $stmt->get_result();
+        
+        $estudiantes = [];
+        while ($row = $resultado->fetch_assoc()) {
+            $estudiantes[] = $row;
+        }
+        
+        $stmt->close();
+        $con->close();
+        
+        return $estudiantes;
+    }
+    
              
 }

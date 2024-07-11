@@ -65,7 +65,7 @@ var cargarInscripcion = (id) => {
         $("#EditarCurso").val(Inscripcion.nombre_curso);
         $("#EditarFechaInscripcion").val(Inscripcion.fecha_inscripcion);
         $("#modalEditarInscripcion").modal("show");
-    }).fail(function() {
+    }).fail(function () {
         Swal.fire({
             title: "Inscripción",
             text: "Ocurrió un error al intentar obtener los datos de la inscripción",
@@ -87,8 +87,48 @@ function cargarCursos() {
     });
 }
 
+var buscarEstudianteInc = (id_estudiante) => {
+    $.get("../controllers/inscripcion.controller.php?op=unoEstudiante&id=" + id_estudiante, (data) => {
+        try {
+            var listaInscripciones = JSON.parse(data);
+            
+            if (Array.isArray(listaInscripciones) && listaInscripciones.length > 0) {
+                var html = "";
+                
+                $.each(listaInscripciones, (indice, unaInscripcion) => {            
+                    html += `
+                        <tr>
+                            <td>${unaInscripcion.id_estudiante}</td>
+                            <td>${unaInscripcion.nombre}</td>
+                            <td>${unaInscripcion.apellido}</td>
+                            <td>${unaInscripcion.nombre_curso}</td>
+                            <td>${unaInscripcion.fecha_inscripcion}</td>
+                            <td>
+                                <button class="btn btn-primary" onclick="cargarInscripcion(${unaInscripcion.id_inscripcion})">Editar</button>
+                                <button class="btn btn-danger" onclick="eliminar(${unaInscripcion.id_inscripcion})">Eliminar</button>
+                            </td>
+                        </tr>
+                    `;
+                });
 
-var guardarInscripcion = (e) =>{
+                $("#cuerpoinscripciones").html(html);
+            } else {
+                console.error("Estudiante no encontrado o no hay inscripciones:", listaInscripciones);
+                cargaTabla();
+            }
+            
+        } catch (e) {
+            console.error("Error parsing JSON:", e);
+            cargaTabla();
+        }
+    }).fail(function() {
+        console.error("Error al obtener las inscripciones del estudiante.");
+        cargaTabla();
+    });
+}
+
+
+var guardarInscripcion = (e) => {
     e.preventDefault();
     var frm_inscripciones = new FormData($("#frm_inscripciones")[0]);
     var ruta = "../controllers/inscripcion.controller.php?op=insertar";
@@ -108,7 +148,7 @@ var guardarInscripcion = (e) =>{
             console.error("Error al guardar:", error);
         }
     });
-    
+
 }
 
 var editar = (e) => {

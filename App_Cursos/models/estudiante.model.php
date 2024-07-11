@@ -9,23 +9,11 @@ class Clase_Estudiante{
         $con = $conexion->conectar();
     
         $sql = "SELECT id_estudiante, nombre, apellido, fecha_nacimiento FROM estudiantes WHERE id_estudiante = ?";
-        $stmt = mysqli_prepare($con, $sql);
-        mysqli_stmt_bind_param($stmt, "s", $id_estudiante);
-        mysqli_stmt_execute($stmt);
-        mysqli_stmt_bind_result($stmt, $id_estudiante, $nombre, $apellido, $fecha_nacimiento);
-        mysqli_stmt_fetch($stmt);
-    
-        $datos = array(
-            'id_estudiante' => $id_estudiante,
-            'nombre' => $nombre,
-            'apellido' => $apellido,
-            'fecha_nacimiento' => $fecha_nacimiento
-        );
-    
-        mysqli_stmt_close($stmt);
-        $con->close();
-        
-        return $datos;
+        $stmt = $con->prepare($sql);
+        $stmt->bind_param("s", $id_estudiante);
+        $stmt->execute();
+        $result = $stmt->get_result()->fetch_assoc();   
+        return $result;
     }
     
 
