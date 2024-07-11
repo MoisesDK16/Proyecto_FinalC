@@ -39,7 +39,6 @@ var cargaTabla = () => {
                         <td>${unClase.id_profesor}</td>
                         <td>${unClase.nombre_profesor}</td>
                         <td>${unClase.apellido_profesor}</td>
-                        <td>${unClase.nombre_departamento}</td>
                         <td>${unClase.numero_aula}</td>
                         <td>${unClase.horario}</td>
                         <td>

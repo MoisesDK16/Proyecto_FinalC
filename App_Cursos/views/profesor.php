@@ -134,8 +134,8 @@
                         <input onkeydown="if (event.keyCode === 13) buscarProfesor(this.value)" style="width: 25rem;" type="text" id="buscarProfesor" class="form-control mb-4 mx-3" placeholder="Buscar Profesor">
                     </div>
                 </div>
+                <h6 style="text-align: center;" class='mb-4'> Lista de Profesores</h6>
                 <div class='d-flex align-items-center justify-content-between mb-4'>
-                    <h6 class='mb-0'> Lista de Profesores</h6>
                     <table class="table table-bordered table-striped table-hover table-responsive">
                         <thead class="table-light">
                             <tr>

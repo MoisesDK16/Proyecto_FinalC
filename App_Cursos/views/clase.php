@@ -149,8 +149,8 @@
                 <button type="button" class="btn btn-primary " data-bs-toggle="modal" data-bs-target="#modalClase">
                     Nueva Clase
                 </button>
+                <h6 style="text-align: center;" class='mb-4'> Lista de Clases</h6>
                 <div class='d-flex align-items-center justify-content-between mb-4'>
-                    <h6 class='mb-0'> Lista de Clases</h6>
                     <table class="table table-bordered table-striped table-hover table-responsive">
                         <thead class="table-light">
                             <tr>
@@ -159,7 +159,6 @@
                                 <th>Identificación Profesor</th>
                                 <th>Nombre Profesor</th>
                                 <th>Apellido Profesor</th>
-                                <th>Departamento</th>
                                 <th>#Aula</th>
                                 <th>Horario</th>
 

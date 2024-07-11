@@ -116,9 +116,10 @@
                 <button id="btnGuardarCurso" type="button" class="btn btn-success mb-5" data-bs-toggle="modal" data-bs-target="#modalCurso">
                     <i class="bi bi-bag-plus-fill mx-2"></i> Añadir Curso
                 </button>
+                
+                <h6 style="text-align: center;" class='mb-3'> Lista de Cursos</h6>
 
                 <div class='d-flex align-items-center justify-content-between mb-4'>
-                    <h6 class='mb-0'> Lista de Cursos</h6>
                     <table class="table table-bordered table-striped table-hover table-responsive">
                         <thead class="table-light">
                             <tr>

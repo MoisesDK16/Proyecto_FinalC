@@ -111,8 +111,8 @@
                 <button type="button" class="btn btn-primary " data-bs-toggle="modal" data-bs-target="#modalAula">
                     Nueva Aula
                 </button>
+                <h6 style="text-align: center;" class='mb-3 mt-4'> Lista de Aulas</h6>
                 <div class='d-flex align-items-center justify-content-between mb-4'>
-                    <h6 class='mb-0'> Lista de Aulas</h6>
                     <table class="table table-bordered table-striped table-hover table-responsive">
                         <thead class="table-light">
                             <tr>
