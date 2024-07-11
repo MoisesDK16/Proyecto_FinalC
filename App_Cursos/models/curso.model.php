@@ -68,7 +68,7 @@ class Curso_Clase {
         $stmt = $con->prepare($sql);
         $stmt->bind_param("i", $id_curso);
         if($stmt->execute()){
-            return "Eliminado exitoso";
+            return "Eliminado correctamente";
         }else{
             return "Error al eliminar";
         }

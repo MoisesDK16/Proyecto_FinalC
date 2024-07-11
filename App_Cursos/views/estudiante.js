@@ -134,19 +134,23 @@ var eliminar = (EstudiantesId) => {
                 data: { id_estudiante: EstudiantesId },
                 success: (resultado) => {
                     console.log("Respuesta del servidor:", resultado);
-                    if (resultado === "Estudiante eliminado") {
+                    try {
+                        let response = JSON.parse(resultado);
+                        if (response === "Estudiante eliminado") {
+                            Swal.fire({
+                                title: "Estudiantes",
+                                text: "Se eliminó con éxito",
+                                icon: "success",
+                            });
+                            cargaTabla();
+                        }
+                    } catch (e) {
                         Swal.fire({
                             title: "Estudiantes",
-                            text: "Se eliminó con éxito",
-                            icon: "success",
-                        });
-                        cargaTabla();
-                    } else {
-                        Swal.fire({
-                            title: "Estudiantes",
-                            text: "No se pudo eliminar",
+                            text: "No se pudo eliminar el estudiante debido a que ya está registrado en otra tabla",
                             icon: "error",
                         });
+                        console.error("Error al parsear JSON:", e);
                     }
                 },
                 error: () => {

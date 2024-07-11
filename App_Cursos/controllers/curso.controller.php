@@ -69,7 +69,7 @@ switch($_GET["op"]){
             $id_curso = intval($_POST["id_curso"]);
             $eliminado = $curso->eliminarCurso($id_curso);
             if ($eliminado) {
-                echo json_encode("Eliminado exitoso");
+                echo json_encode("Eliminado correctamente");
             } else {
                 echo json_encode("Error al eliminar");
             }

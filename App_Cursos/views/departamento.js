@@ -62,7 +62,7 @@ var cargarDepartamento = (id_departamento) => {
         console.log("Departamento encontrado:", Departamento);
         $("#EditarDepartamentoId").val(Departamento.id_departamento);
         $("#EditarNombre").val(Departamento.nombre_departamento);
-        $("#modalEditarDepartamento").modal("show"); 
+        $("#modalEditarDepartamento").modal("show");
     }).fail(function() {
         Swal.fire({
             title: "Departamento",
@@ -113,22 +113,26 @@ var eliminar = (DepartamentoId) => {
             $.ajax({
                 url: "../controllers/departamento.controller.php?op=eliminar",
                 type: "POST",
-                data: { id_departamento: DepartamentoId},
+                data: { id_departamento: DepartamentoId },
                 success: (resultado) => {
                     console.log("Respuesta del servidor:", resultado);
-                    if (resultado === "Eliminado exitoso") {
-                        Swal.fire({
-                            title: "Departamento",
-                            text: "Se eliminó con éxito",
-                            icon: "success",
-                        });
-                        location.reload(); // Recargar la página
-                    } else {
+                    try {
+                        let response = JSON.parse(resultado);
+                        if (response.message === "Eliminado correctamente") {
+                            Swal.fire({
+                                title: "Departamento",
+                                text: "Se eliminó con éxito",
+                                icon: "success",
+                            });
+                            cargaTabla();
+                        }
+                    } catch (e) {
                         Swal.fire({
                             title: "Departamentos",
-                            text: "No se pudo eliminar",
+                            text: "No se pudo eliminar el departamento debido a que ya está registrado en otra tabla",
                             icon: "error",
                         });
+                        console.error("Error al parsear JSON:", e);
                     }
                 },
                 error: () => {

@@ -92,7 +92,7 @@
                                 </div>
                             </div>
                             <div class="modal-footer">
-                                <button type="submit" class="btn btn-primary" id="EditguardarDepartamento">Actualizar</button>
+                                <button type="submit" class="btn btn-primary">Actualizar</button>
                                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
                             </div>
                         </form>

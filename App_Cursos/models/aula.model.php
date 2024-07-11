@@ -54,7 +54,7 @@ class Clase_Aula{
     public function eliminarAula($id_aula){
         $conexion = new Clase_Conectar();
         $con = $conexion->conectar();
-        $sql = "DELETE FROM aulas WHERE numero_aula = ?";
+        $sql = "DELETE FROM aulas WHERE id_aula = ?";
         $stmt = $con->prepare($sql);
         $stmt->bind_param("i", $id_aula);
         $stmt->execute();

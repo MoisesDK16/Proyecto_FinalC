@@ -63,13 +63,14 @@ class Departamento_Clase {
     public function eliminarDepartamento($id_departamento){
         $conexion = new Clase_Conectar();
         $con = $conexion->conectar();
+        
         $sql = "DELETE FROM departamentos WHERE id_departamento =?";
         $stmt = $con->prepare($sql);
         $stmt->bind_param("i", $id_departamento);
-        if($stmt->execute()){
-            return "Eliminado exitoso";
-        }else{
-            return "Error al eliminar";
+        if ($stmt->execute()) {
+            return true;
+        } else {
+            return false;
         }
         $con->close();
     }

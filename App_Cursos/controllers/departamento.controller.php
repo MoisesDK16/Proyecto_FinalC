@@ -8,10 +8,10 @@ $metodo = $_SERVER['REQUEST_METHOD'];
 switch($_GET["op"]){
     
     case 'uno':
-        if (isset($_GET["id_departamento"])) {
-            $idDepartamento = intval($_GET["id_departamento"]);
+        if (isset($_GET["id"])) {
+            $idDepartamento = intval($_GET["id"]);
             $datos = $departamento->uno($idDepartamento);
-            echo json_encode($datos); // Devuelve los datos del usuario en formato JSON
+            echo json_encode($datos);
         } else {
             echo json_encode(array("message" => "ID no proporcionado"));
         }
@@ -42,11 +42,11 @@ switch($_GET["op"]){
     break;
 
     case "actualizar":
-        $DepartamentoId = $_POST["EditarDepartamentoId"] ?? null;
-        $Nombre = $_POST["EditarNombre"] ?? null;
+        $id_departamento = $_POST["EditarDepartamentoId"] ?? null;
+        $nombre_departamento = $_POST["EditarNombre"] ?? null;
 
-        if ($DepartamentoId && $Nombre) {
-            $actualizado = $departamento->actualizarDepartamento($DepartamentoId, $Nombre);
+        if (!empty($id_departamento) && !empty($nombre_departamento)) {
+            $actualizado = $departamento->actualizarDepartamento($id_departamento, $nombre_departamento);
             if ($actualizado) {
                 echo json_encode("Actualizado");
             } else {
@@ -59,17 +59,17 @@ switch($_GET["op"]){
 
     case "eliminar":
         if (isset($_POST["id_departamento"])) {
-            $id_departamento = $_POST["id_departamento"];
+            $id_departamento = intval($_POST["id_departamento"]);
             $eliminado = $departamento->eliminarDepartamento($id_departamento);
-            echo json_encode($eliminado);
+            if ($eliminado) {
+                echo json_encode(array("message" => "Eliminado correctamente"));
+            }else {
+                echo json_encode(array("message" => "Error al eliminar"));
+            }
         } else {
-            echo json_encode("Error al eliminar");
+            echo json_encode(array("message" => "ID no proporcionado"));
         }
     break;
-
-    default:
-        echo json_encode(array("message" => "Operación no válida"));
-        break;
 
 }
 

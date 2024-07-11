@@ -126,19 +126,23 @@ var eliminar = (AulasId) => {
                 data: { id_aula: AulasId },
                 success: (resultado) => {
                     console.log("Respuesta del servidor:", resultado);
-                    if (resultado === "Eliminado exitoso") {
+                    try {
+                        let response = JSON.parse(resultado);
+                        if (response.message === "Error al eliminar aula") {
+                            Swal.fire({
+                                title: "Aulas",
+                                text: "Se eliminó con éxito",
+                                icon: "success",
+                            });
+                            cargaTabla();
+                        }
+                    } catch (e) {
                         Swal.fire({
                             title: "Aulas",
-                            text: "Se eliminó con éxito",
-                            icon: "success",
-                        });
-                        cargaTabla();
-                    } else {
-                        Swal.fire({
-                            title: "Aulas",
-                            text: "No se pudo eliminar",
+                            text: "No se pudo eliminar el aula debido a que ya está registrado en otra tabla",
                             icon: "error",
                         });
+                        console.error("Error al parsear JSON:", e);
                     }
                 },
                 error: () => {

@@ -77,10 +77,10 @@ switch ($_GET["op"]) {
     /* Procedimiento para eliminar */
     case 'eliminar':
         if (isset($_POST["id_aula"])) {
-            $id_aula = intval($_POST["id_aula"]);
+            $id_aula = $_POST["id_aula"];
             $eliminar = $aula->eliminarAula($id_aula);
             if ($eliminar) {
-                echo json_encode(array("message" => "Aula eliminada correctamente"));
+                echo json_encode(array("message" => "Eliminado exitoso"));
             } else {
                 echo json_encode(array("message" => "Error al eliminar aula"));
             }
